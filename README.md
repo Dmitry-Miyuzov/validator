@@ -41,7 +41,7 @@ ValidatorFabric - из главных возможностей.<br>
 
 # 3. ValidatorFabric - основная часть инструмента. <a name="validatorFabric"></a>
 Отправной точкой является обращение к классу ValidatorFabric<br>
-![img.png](resources/png/img.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img.png)<br>
 
 Как видно из скриншота, есть 3 разные вариации вызова фабрики.
 1. AssertValidation - предоставляет проверки утверждения.<br>
@@ -61,11 +61,11 @@ ValidatorFabric - из главных возможностей.<br>
 4. <u>String errorMessage</u> - если данные параметр заполнен, в allure-отчете под упавший шаг проверки - будет добавлен еще один шаг, с описание которое вы указали под этот параметр.<br>
 5. Чем отличается Supplier<'Boolean'> condition от boolean condition? Там где вы видите в ожидаемом результате принимает Supplier - действует это правило, которое я опишу ниже<br><br>
    Пример по данным аспектам, из кода:<br>
-   ![img.png](resources/png/img4.png)<br>
+   ![img.png](src/main/resources/_documentation/resources/png/img4.png)<br>
    Пример консоли, исходя из этой цепочки проверок:<br>
-   ![img.png](resources/png/img5.png)<br>
+   ![img.png](src/main/resources/_documentation/resources/png/img5.png)<br>
    Пример Allure-отчета:<br>
-   ![img_1.png](resources/png/img6.png)<br>
+   ![img_1.png](src/main/resources/_documentation/resources/png/img6.png)<br>
 
 Что мы видим:
 1. Название главного шага<br>
@@ -75,10 +75,10 @@ ValidatorFabric - из главных возможностей.<br>
 
 # 3.1.2 Чем отличается Supplier<'Boolean'> condition от boolean condition? <a name="supplierMoment"></a>
 Посмотрим пример из кода:<br>
-![img.png](resources/png/img7.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img7.png)<br>
 
 А теперь запустим тест, и посмотрим Allure-отчет:<br>
-![img.png](resources/png/img8.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img8.png)<br>
 Как видим из отчета, там где мы передавали метод с шагом - без функции, там этот шаг "улетел из контекста".<br>
 Там где мы передавали метод с шагом - как функцию, там этот шаг находится в контексте.<br>
 
@@ -87,14 +87,14 @@ ValidatorFabric - из главных возможностей.<br>
 
 # 3.1.3 GroupSoft - проверки <a name="groupSoft"></a>
 Рассмотрим сразу на коде:<br>
-![img.png](resources/png/img9.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img9.png)<br>
 Что мы здесь видим?<br>
 Мы вызываем на главным уровне две групповых проверки.<br>
 1. Первая групповая проверка - содержит в себе 2 валидации, одна из них упадет. Соответственно групповая проверка считается проваленной.<br>
 2. Вторая групповая проверка - содержит в себе 2 групповые проверки, первая групповая проверка - будет проваленной. Вторая групповая проверка будет успешной.<br>
    Т.к вторая групповая проверка - состоит из 2 подгрупповых проверок, и одна из них будет проваленной, соответственно главная групповая проверка - будет проваленной.<br>
    Посмотрим внимательно Allure-отчет:<br>
-   ![img.png](resources/png/img10.png)<br>
+   ![img.png](src/main/resources/_documentation/resources/png/img10.png)<br>
 
 Важные моменты для групповых проверок:<br>
 1. Можно в групповых проверках вызывать групповые проверки (сколько угодно -> главное не запутайтесь)<br>
@@ -104,11 +104,11 @@ ValidatorFabric - из главных возможностей.<br>
    Если вы вызвали в групповой проверке - групповую проверку, вы не сможете назвать параметр опять nestedBuilder, т.к. будет конфликт имен.<br>
    Вам нужно будет назвать nestedValidator2 (например), и тогда используйте внутри этой групповой проверки именно эту переменную.<br>
    Пример:<br>
-   ![img_1.png](resources/png/img11.png)<br>
+   ![img_1.png](src/main/resources/_documentation/resources/png/img11.png)<br>
 
 # 3.2 AssertValidation. <a name="assertValidation"></a>
 При вызове фабрики предоставляется 2 метода:<br>
-![img.png](resources/png/img2.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img2.png)<br>
 
 Дают доступ до данного типа проверок:<br>
 <u>beginAssertValidation()</u> - В аллюр печатается шаг по умолчанию -> "Проверки (Assert)".<br>
@@ -116,7 +116,7 @@ ValidatorFabric - из главных возможностей.<br>
 <br>
 Этот шаг будет являться главным в Allure-отчете для проверок - которые будут далее вызываться по цепочке.<br>
 <u>Пример</u>:
-![img.png](resources/png/img3.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img3.png)<br>
 
 # 3.2.1 Доcтупные методы <a name="assertionAvailableMethod"></a>
 ## AssertTrue
@@ -178,13 +178,13 @@ assertNotNull(String allureStepName, Supplier<'Object'> object, String errorMess
 ## AssertLocalDateTime
 assertLocalDateTime(String nameActualDate, String nameExpectedDate, LocalDateTime actual, LocalDateTime expected, DateTimeFormatter format);<br>
 Пример позитивный:<br>
-![img.png](resources/png/img12.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img12.png)<br>
 Отчет в аллюре:<br>
-![img.png](resources/png/img13.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img13.png)<br>
 Пример негативный:<br>
-![img.png](resources/png/img14.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img14.png)<br>
 Отчет в аллюре:<br>
-![img.png](resources/png/img15.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img15.png)<br>
 
 Имеются аналоги -> Soft
 
@@ -201,13 +201,13 @@ assertZonedDateTimeWithToleranceHours(String allureStepName, ZonedDateTime z1, S
 assertZonedDateTimeWithToleranceHours(String allureStepName, Supplier<'ZonedDateTime'> z1, Supplier<'ZonedDateTime'> z2, long allowDifferenceHours);<br>
 
 Пример позитивный:<br>
-![img.png](resources/png/img16.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img16.png)<br>
 Отчет в аллюре:<br>
-![img_1.png](resources/png/img17.png)<br>
+![img_1.png](src/main/resources/_documentation/resources/png/img17.png)<br>
 Пример негативный:<br>
-![img_2.png](resources/png/img18.png)<br>
+![img_2.png](src/main/resources/_documentation/resources/png/img18.png)<br>
 Отчет в аллюре:<br>
-![img_3.png](resources/png/img19.png)<br>
+![img_3.png](src/main/resources/_documentation/resources/png/img19.png)<br>
 
 
 Имеются ровно такие же методы, только Minutes, Second.
@@ -225,15 +225,15 @@ String errorMessageAllure - дополнительное описание оши
 При ошибке -> в консоли будет указано описание из исключения которое было вызвано.<br>
 
 Примеры:<br>
-![img.png](resources/png/img43.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img43.png)<br>
 Отчет в аллюре:<br>
-![img.png](resources/png/img44.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img44.png)<br>
 
 Имеются аналоги -> Soft для каждого метода.
 
 # 3.3 ResponseValidation. <a name="responseValidation"></a>
 При вызове фабрики предоставляется несколько методов.<br>
-![img.png](resources/png/img20.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img20.png)<br>
 Response - объект от RestAssured
 Responsible - интерфейс (кастомный), для случая, если вы оборачиваете Response в другой объект.<br>
 Тогда "другой объект" должен реализовывать данный интерфейс.<br>
@@ -247,9 +247,9 @@ body(String allureStepName, String jsonPath, Matcher<'T'> matcher);<br>
 body(String allureStepName, String jsonPath, Matcher<'T'> matcher, String allureErrorMessage);<br>
 
 Код:<br>
-![img_1.png](resources/png/img21.png)<br>
+![img_1.png](src/main/resources/_documentation/resources/png/img21.png)<br>
 Allure-отчет и валидируемый json:<br>
-![img_2.png](resources/png/img22.png)<br>
+![img_2.png](src/main/resources/_documentation/resources/png/img22.png)<br>
 
 Имеются аналоги -> Soft для каждого метода.
 
@@ -258,9 +258,9 @@ bodyHasAttribute(String parentJsonPath, String attribute);<br>
 bodyNotHasAttribute(String parentJsonPath, String attribute);<br>
 
 Код:<br>
-![img_3.png](resources/png/img23.png)<br>
+![img_3.png](src/main/resources/_documentation/resources/png/img23.png)<br>
 Allure-отчет и валидируемый json:<br>
-![img_4.png](resources/png/img24.png)<br>
+![img_4.png](src/main/resources/_documentation/resources/png/img24.png)<br>
 
 Имеются аналоги -> Soft для каждого метода.
 
@@ -269,9 +269,9 @@ bodyHasAttribute(String parentJsonPath, String attribute);<br>
 bodyNotHasAttribute(String parentJsonPath, String attribute);<br>
 
 Код:<br>
-![img_5.png](resources/png/img25.png)<br>
+![img_5.png](src/main/resources/_documentation/resources/png/img25.png)<br>
 Allure-отчет и валидируемый json:<br>
-![img_6.png](resources/png/img26.png)<br>
+![img_6.png](src/main/resources/_documentation/resources/png/img26.png)<br>
 
 Имеются аналоги -> Soft для каждого метода.
 
@@ -280,9 +280,9 @@ bodyArrayEmpty(String jsonPath);
 bodyArraySizeEquals(String jsonPath, int expectedSize);
 
 Код:<br>
-![img_7.png](resources/png/img27.png)<br>
+![img_7.png](src/main/resources/_documentation/resources/png/img27.png)<br>
 Allure-отчет и валидируемый json:<br>
-![img_8.png](resources/png/img28.png)<br>
+![img_8.png](src/main/resources/_documentation/resources/png/img28.png)<br>
 
 Имеются аналоги -> Soft для каждого метода.
 
@@ -294,9 +294,9 @@ statusCodeOrElse(int expectedStatus, Consumer<Response> orElse) - функция
 statusCodeAndElse(int expectedStatus, Consumer<Response> andElse); - функция выполнится в любом случае (упадет или пройдент не важно)<br>
 
 Код:<br>
-![img_10.png](resources/png/img30.png)<br>
+![img_10.png](src/main/resources/_documentation/resources/png/img30.png)<br>
 Allure-отчет и валидируемый json:<br>
-![img_9.png](resources/png/img29.png)<br>
+![img_9.png](src/main/resources/_documentation/resources/png/img29.png)<br>
 
 Имеются аналоги -> Soft для каждого метода.
 
@@ -305,9 +305,9 @@ headerEquals(String header, String expectedValue);<br>
 headerContains(String header, String containsValue);<br>
 
 Код:<br>
-![img.png](resources/png/img31.png)
+![img.png](src/main/resources/_documentation/resources/png/img31.png)
 Allure-отчет и валидируемый json:<br>
-![img_1.png](resources/png/img32.png)
+![img_1.png](src/main/resources/_documentation/resources/png/img32.png)
 
 Имеются аналоги -> Soft для каждого метода.
 
@@ -319,7 +319,7 @@ matchesJsonSchema(String schema);<br>
 Хранение схемы определяете сами (рекомендую в ресурсах)<br>
 
 Пример отчета при падении теста по схеме:<br>
-![img.png](resources/png/img33.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img33.png)<br>
 
 Прикладывается сама схема, и ошибки схемы.<br>
 
@@ -334,7 +334,7 @@ bodyEqualsFile(String pathFile)<br>
 Пример вызова:<br>
 .bodyEqualsFileSoft("testFiles/dictionaries/cardSettings/create/feature-create.json")<br>
 Расположение файла:<br>
-![img.png](resources/png/img34.png)
+![img.png](src/main/resources/_documentation/resources/png/img34.png)
 
 Имеются аналоги -> Soft для каждого метода.
 
@@ -342,20 +342,20 @@ bodyEqualsFile(String pathFile)<br>
 
 # 4.1 AllureConfig: <a name="allureConfig"></a>
 Предоставляется возможность отключать конфигурировать Allure.<br>
-![img.png](resources/png/img35.png)<br>
+![img.png](src/main/resources/_documentation/resources/png/img35.png)<br>
 
 Подробнее про каждую:<br>
 disableSoftName<br>
 Код:<br>
-![img_1.png](resources/png/img36.png)<br>
+![img_1.png](src/main/resources/_documentation/resources/png/img36.png)<br>
 Allure отчет:<br>
-![img_2.png](resources/png/img37.png)<br>
+![img_2.png](src/main/resources/_documentation/resources/png/img37.png)<br>
 
 disableValidationName<br>
 Код:<br>
-![img_4.png](resources/png/img39.png)<br>
+![img_4.png](src/main/resources/_documentation/resources/png/img39.png)<br>
 Allure отчет:<br>
-![img_3.png](resources/png/img38.png)<br>
+![img_3.png](src/main/resources/_documentation/resources/png/img38.png)<br>
 
 disableMessageError - работает по аналогии. Отключает шаги описаний ошибок.<br><br><br>
 Делаем вывод -> что каждый параметр отвечает за конкретную сущность.<br>
@@ -365,13 +365,13 @@ disableMessageError - работает по аналогии. Отключает
 
 # 4.2 Настройка стек-трейса: <a name="settingsStackTrace"></a>
 После переноса валидатора себе, вам нужно изменить одну строчку кода, для того чтобы по умолчанию был красивый стек-трейс<br>
-![img_5.png](resources/png/img40.png)<br>
+![img_5.png](src/main/resources/_documentation/resources/png/img40.png)<br>
 
 Нужно указать groupId вашего проекта.<br>
 Как его можно определить в проекте:<br>
-![img_6.png](resources/png/img41.png)<br>
+![img_6.png](src/main/resources/_documentation/resources/png/img41.png)<br>
 Как его можно определить в gradle:<br>
-![img_7.png](resources/png/img42.png)<br>
+![img_7.png](src/main/resources/_documentation/resources/png/img42.png)<br>
 
 Чтобы включить полный стек-трейс, у вас должна быть установлена Env переменная debug -> с значением true.
 
