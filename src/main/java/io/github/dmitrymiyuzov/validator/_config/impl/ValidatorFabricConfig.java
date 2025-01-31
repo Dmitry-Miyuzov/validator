@@ -6,6 +6,11 @@ import org.aeonbits.owner.Config;
         "classpath:config/validatorFabric.properties"
 })
 public interface ValidatorFabricConfig extends Config {
-    @Config.Key("validator.stackTracesFilter")
-    String stackTracesFilter();
+
+    @Config.Key("validator.isNeedStackTracesFilter")
+    Boolean isNeedStackTracesFilter();
+
+    @Config.Key("validator.stackTracesFilterByContainsClasses")
+    @Separator(",")
+    String[] stackTracesFilterByContainsClasses();
 }

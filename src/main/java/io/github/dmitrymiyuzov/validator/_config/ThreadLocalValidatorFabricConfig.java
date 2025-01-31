@@ -9,7 +9,6 @@ public class ThreadLocalValidatorFabricConfig implements ValidatorFabricConfig {
     private static final ThreadLocal<ValidatorFabricConfig> config = ThreadLocal.withInitial(() -> defaultConfig);
 
     public ThreadLocalValidatorFabricConfig() {
-        System.out.println();
     }
 
     public static void setConfig(ValidatorFabricConfig config) {
@@ -25,13 +24,20 @@ public class ThreadLocalValidatorFabricConfig implements ValidatorFabricConfig {
     }
 
     @Override
-    public String stackTracesFilter() {
-        return config.get().stackTracesFilter();
+    public String[] stackTracesFilterByContainsClasses() {
+        return config.get().stackTracesFilterByContainsClasses();
+    }
+
+    @Override
+    public Boolean isNeedStackTracesFilter() {
+        return config.get().isNeedStackTracesFilter();
     }
 
     private static ValidatorFabricConfig getDefaultConfig() {
         ValidatorFabricConfig defaultWithFile = ConfigFactory.create(ValidatorFabricConfig.class);
-        if (defaultWithFile.stackTracesFilter() == null) {
+        if (
+                defaultWithFile.stackTracesFilterByContainsClasses() == null
+        ) {
             return new DefaultConfig();
         } else {
             return defaultWithFile;

@@ -34,31 +34,29 @@ public class ErrorManager {
     }
 
     private void filterStackTrace(Throwable trace) {
-        /*
+        if (config.isNeedStackTracesFilter()) {
+            /*
         Такая конструкция - из за того, чтобы сделать коллекцию модифицируемой.
          */
-        List<String> filterStackTraces = new ArrayList<>(
-                Arrays.stream(config.stackTracesFilter().split(","))
-                        .map(String::trim)
-                        .toList()
-        );
+            List<String> filterStackTraces = new ArrayList<>(
+                    Arrays.stream(config.stackTracesFilterByContainsClasses())
+                            .map(String::trim)
+                            .toList()
+            );
 
-        if (filterStackTraces.size() == 1 && filterStackTraces.get(0).isBlank()) {
-            filterStackTraces.remove(0);
-        }
+            if (filterStackTraces.size() == 1 && filterStackTraces.get(0).isBlank()) {
+                filterStackTraces.remove(0);
+            }
 
-        Predicate<? super StackTraceElement> isNeedSaveStackTrace = element -> {
             /*
             Нужно ли сохранить стек-трейс
              */
-            return filterStackTraces.stream()
-                    .noneMatch(
-                            filterElement -> element.getClassName().contains(filterElement)
-                    );
-        };
+            Predicate<? super StackTraceElement> isNeedSaveStackTrace = element ->
+                    filterStackTraces.stream()
+                            .noneMatch(
+                                    filterElement -> element.getClassName().contains(filterElement)
+                            );
 
-        String debugProperty = getDebugProperty();
-        if (debugProperty.equals("false")) {
             List<StackTraceElement> list = Arrays.asList(trace.getStackTrace());
             list = list.stream()
                     .filter(isNeedSaveStackTrace)
@@ -66,11 +64,6 @@ public class ErrorManager {
                     .collect(Collectors.toList());
             trace.setStackTrace(list.toArray(new StackTraceElement[0]));
         }
-    }
-
-    private String getDebugProperty() {
-        return Optional.ofNullable(System.getProperty("debug"))
-                .orElse("false");
     }
 
     /**
