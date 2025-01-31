@@ -1,13 +1,27 @@
 plugins {
     id("java")
+    id("io.qameta.allure") version "2.9.6"
+}
+
+allure {
+    report {
+        version.set("2.17.3")
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        aspectjVersion.set("1.9.7")
+        frameworks {
+            junit5 {
+                adapterVersion.set("2.17.3")
+            }
+        }
+    }
 }
 
 group = "io.github.dmitrymiyuzov"
 version = "1.0"
 
-repositories {
-    mavenCentral()
-}
+
 
 dependencies {
     implementation("io.qameta.allure:allure-java-commons:2.17.3")
@@ -39,9 +53,23 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.3")
+    testImplementation("org.junit.platform:junit-platform-launcher:1.9.2")
+
+    /*
+    Для запуска тестов.
+     */
+    runtimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.3")
 
 }
 
-tasks.test {
+fun Test.common() {
+    systemProperty("allure.results.directory", "$rootDir/allure-results")
+    systemProperties["file.encoding"] = "UTF-8"
+    systemProperties["encoding"] = "UTF-8"
+    outputs.upToDateWhen { false }
+}
+
+tasks.register<Test>("runTest") {
     useJUnitPlatform()
+    common();
 }

@@ -32,12 +32,16 @@ ValidatorFabric - из главных возможностей.<br>
 # 2. Сторонние зависимости: <a name="dependencies"></a>
 В данном разделе не будет версий библиотек, т.к. я не тестировал различные версии<br>
 Плюс не всегда будет указана зависимость, а будет просто указан пакет с классом -> при необходимости этой информации будет достаточно для понимания.<br>
-1. io.rest-assured:rest-assured<br>
-2. org.junit.jupiter.api.Assertions -> по факту можно заменить на какой-нибудь другой Assertions.<br>
-3. io.qameta.allure<br>
-4. com.github.erosb:everit-json-schema<br>
-5. com.fasterxml.jackson
-<br><br>
+1. io.rest-assured:rest-assured:4.4.0<br>
+2. org.assertj:assertj-core:3.24.2<br>
+3. io.qameta.allure:allure-java-commons:2.17.3<br>
+4. com.github.erosb:everit-json-schema:1.14.4<br>
+5. com.fasterxml.jackson.core:jackson-databind:2.13.4.2<br>
+6. com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.1<br>
+7. org.aeonbits.owner:owner:1.0.12<br>
+8. com.opencsv:opencsv:5.7.1<br>
+9. org.apache.poi:poi-ooxml:5.2.2
+<br>
 
 # 3. ValidatorFabric - основная часть инструмента. <a name="validatorFabric"></a>
 Отправной точкой является обращение к классу ValidatorFabric<br>
