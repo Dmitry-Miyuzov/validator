@@ -7,10 +7,13 @@ import org.aeonbits.owner.Config;
 })
 public interface ValidatorFabricConfig extends Config {
 
-    @Config.Key("validator.isNeedStackTracesFilter")
-    Boolean isNeedStackTracesFilter();
+    @Key("validator.stacktrace.isEnableFilter")
+    Boolean isEnabledFilter();
 
-    @Config.Key("validator.stackTracesFilterByContainsClasses")
+    @Key("validator.stacktrace.includeByContainsPackage")
+    String  includeByContainsPackage();
+
+    @Key("validator.stacktrace.excludeByContainsClasses")
     @Separator(",")
-    String[] stackTracesFilterByContainsClasses();
+    String[] excludeByContainsClasses();
 }

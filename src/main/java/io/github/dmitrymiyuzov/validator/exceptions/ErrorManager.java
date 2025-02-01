@@ -34,36 +34,55 @@ public class ErrorManager {
     }
 
     private void filterStackTrace(Throwable trace) {
-        if (config.isNeedStackTracesFilter()) {
-            /*
-        Такая конструкция - из за того, чтобы сделать коллекцию модифицируемой.
-         */
-            List<String> filterStackTraces = new ArrayList<>(
-                    Arrays.stream(config.stackTracesFilterByContainsClasses())
-                            .map(String::trim)
-                            .toList()
-            );
-
-            if (filterStackTraces.size() == 1 && filterStackTraces.get(0).isBlank()) {
-                filterStackTraces.remove(0);
-            }
-
-            /*
-            Нужно ли сохранить стек-трейс
-             */
-            Predicate<? super StackTraceElement> isNeedSaveStackTrace = element ->
-                    filterStackTraces.stream()
-                            .noneMatch(
-                                    filterElement -> element.getClassName().contains(filterElement)
-                            );
-
-            List<StackTraceElement> list = Arrays.asList(trace.getStackTrace());
-            list = list.stream()
-                    .filter(isNeedSaveStackTrace)
+        if (config.isEnabledFilter()) {
+            trace.setStackTrace(Arrays.asList(trace.getStackTrace())
+                    .stream()
                     .filter(lastTraceInClass())
-                    .collect(Collectors.toList());
-            trace.setStackTrace(list.toArray(new StackTraceElement[0]));
+                    .filter(predicateNeedSaveStacktraceByContainsPackage())
+                    .filter(predicateNeedSaveStacktraceByContainsClasses())
+                    .toArray(StackTraceElement[]::new));
         }
+    }
+
+    private Predicate<? super StackTraceElement> predicateNeedSaveStacktraceByContainsPackage() {
+        String includePackage = config.includeByContainsPackage();
+
+        if (
+                includePackage == null
+                ||
+                includePackage.isBlank()
+        ) {
+            includePackage = "";
+        }
+
+        String finalIncludePackage = includePackage;
+        return element -> element.getClassName().contains(finalIncludePackage);
+    }
+
+    private Predicate<? super StackTraceElement> predicateNeedSaveStacktraceByContainsClasses() {
+        List<String> excludeByContainsClasses = new ArrayList<>(
+                Arrays.stream(config.excludeByContainsClasses())
+                        .map(String::trim)
+                        .toList()
+        );
+
+        if (
+                excludeByContainsClasses.size() == 1
+                &&
+                (
+                        excludeByContainsClasses.get(0) == null
+                        ||
+                        excludeByContainsClasses.get(0).isBlank()
+                )
+        ) {
+            excludeByContainsClasses.remove(0);
+        }
+
+        return element ->
+                excludeByContainsClasses.stream()
+                        .noneMatch(
+                                filterElement -> element.getClassName().contains(filterElement)
+                        );
     }
 
     /**

@@ -65,7 +65,6 @@ public class Validator {
         } else {
             passedExit();
         }
-        ThreadLocalValidatorFabricConfig.remove();
     }
 
     private void failedExit() {

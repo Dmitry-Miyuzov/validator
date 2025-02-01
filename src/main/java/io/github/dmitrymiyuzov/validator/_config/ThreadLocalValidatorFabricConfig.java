@@ -19,24 +19,25 @@ public class ThreadLocalValidatorFabricConfig implements ValidatorFabricConfig {
         return ThreadLocalValidatorFabricConfig.config.get();
     }
 
-    public static void remove() {
-        ThreadLocalValidatorFabricConfig.config.remove();
+    @Override
+    public Boolean isEnabledFilter() {
+        return config.get().isEnabledFilter();
     }
 
     @Override
-    public String[] stackTracesFilterByContainsClasses() {
-        return config.get().stackTracesFilterByContainsClasses();
+    public String includeByContainsPackage() {
+        return config.get().includeByContainsPackage();
     }
 
     @Override
-    public Boolean isNeedStackTracesFilter() {
-        return config.get().isNeedStackTracesFilter();
+    public String[] excludeByContainsClasses() {
+        return config.get().excludeByContainsClasses();
     }
 
     private static ValidatorFabricConfig getDefaultConfig() {
         ValidatorFabricConfig defaultWithFile = ConfigFactory.create(ValidatorFabricConfig.class);
         if (
-                defaultWithFile.stackTracesFilterByContainsClasses() == null
+                defaultWithFile.isEnabledFilter() == null
         ) {
             return new DefaultConfig();
         } else {

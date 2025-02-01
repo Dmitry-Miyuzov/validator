@@ -4,12 +4,17 @@ import io.github.dmitrymiyuzov.validator._config.impl.ValidatorFabricConfig;
 
 public class DefaultConfig implements ValidatorFabricConfig {
     @Override
-    public String[] stackTracesFilterByContainsClasses() {
+    public String[] excludeByContainsClasses() {
         return new String[] {""};
     }
 
     @Override
-    public Boolean isNeedStackTracesFilter() {
+    public String includeByContainsPackage() {
+        return "";
+    }
+
+    @Override
+    public Boolean isEnabledFilter() {
         return false;
     }
 }
