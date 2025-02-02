@@ -81,9 +81,9 @@ public interface AssertValidatableSoft<R> {
     @CheckReturnValue
     R assertNullSoft(String allureStepName, Object object, String errorMessage);
     @CheckReturnValue
-    R assertNullSoft(String allureStepName, Supplier<Object> object);
+    <T> R assertNullSoft(String allureStepName, Supplier<T> object);
     @CheckReturnValue
-    R assertNullSoft(String allureStepName, Supplier<Object> object, String errorMessage);
+    <T> R assertNullSoft(String allureStepName, Supplier<T> object, String errorMessage);
 
     /******************************************NOT NULL SOFT*************************************/
     @CheckReturnValue
@@ -91,9 +91,9 @@ public interface AssertValidatableSoft<R> {
     @CheckReturnValue
     R assertNotNullSoft(String allureStepName, Object object, String errorMessage);
     @CheckReturnValue
-    R assertNotNullSoft(String allureStepName, Supplier<Object> object);
+    <T> R assertNotNullSoft(String allureStepName, Supplier<T> object);
     @CheckReturnValue
-    R assertNotNullSoft(String allureStepName, Supplier<Object> object, String errorMessage);
+    <T> R assertNotNullSoft(String allureStepName, Supplier<T> object, String errorMessage);
 
     /******************************************LOCAL DATE TIME*************************************/
     R assertLocalDateTimeSoft(String nameActualDate, String nameExpectedDate,

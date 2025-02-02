@@ -1,7 +1,6 @@
 package io.github.dmitrymiyuzov.validator.base;
 
 
-import io.github.dmitrymiyuzov.validator._config.ThreadLocalValidatorFabricConfig;
 import io.github.dmitrymiyuzov.validator._config.impl.ValidatorFabricConfig;
 import io.github.dmitrymiyuzov.validator.allure.AllureConfig;
 import io.github.dmitrymiyuzov.validator.allure.AllureStepValidator;
@@ -25,6 +24,7 @@ public class Validator {
     private final ErrorManager errorManager;
     private final AllureStepValidator mainAllureStep;
     private final AllureConfig allureConfig;
+    private Status mainAllureStepStatus;
     private Responsible responsible;
 
     Validator(String allureStepName, ValidatorFabricConfig config) {
@@ -61,15 +61,15 @@ public class Validator {
      */
     public void validate() {
         if (errorManager.isSoftAssert()) {
-            failedExit();
+            failedExit(mainAllureStepStatus);
         } else {
             passedExit();
         }
     }
 
-    private void failedExit() {
+    private void failedExit(Status status) {
         AllureStepValidator.doStep(errorManager.getFailedTextChainEnd(), Status.FAILED, false);
-        exitMainAllureStep(Status.FAILED);
+        exitMainAllureStep(status);
 
         errorManager.throwException(errorManager.getFailedTextChainEnd());
     }
@@ -112,6 +112,15 @@ public class Validator {
 
     public AllureStepValidator getMainAllureStep() {
         return mainAllureStep;
+    }
+
+    public void setMainAllureStepStatusWhenSoft(Status status) {
+        if (mainAllureStepStatus == null) {
+            mainAllureStepStatus = status;
+        } else if (mainAllureStepStatus.equals(Status.FAILED)) {
+            mainAllureStepStatus = status;
+        }
+
     }
 
     public Responsible getExchange() {

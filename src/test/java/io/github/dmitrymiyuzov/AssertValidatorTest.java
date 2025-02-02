@@ -121,7 +121,7 @@ public class AssertValidatorTest {
                             )
                             .validate();
                     Assertions.fail();
-                } catch (NumberFormatException e) {
+                } catch (ChainValidationError e) {
                     e.printStackTrace();
                 }
 
@@ -139,7 +139,7 @@ public class AssertValidatorTest {
                             )
                             .validate();
                     Assertions.fail();
-                } catch (NumberFormatException e) {
+                } catch (ChainValidationError e) {
                     e.printStackTrace();
                 }
             }
@@ -156,7 +156,7 @@ public class AssertValidatorTest {
                             )
                             .validate();
                     Assertions.fail();
-                } catch (NumberFormatException e) {
+                } catch (ChainValidationError e) {
                     e.printStackTrace();
                 }
             }
@@ -292,7 +292,7 @@ public class AssertValidatorTest {
                             )
                             .validate();
                     Assertions.fail();
-                } catch (NumberFormatException e) {
+                } catch (ChainValidationError e) {
                     e.printStackTrace();
                 }
             }
@@ -309,7 +309,7 @@ public class AssertValidatorTest {
                             )
                             .validate();
                     Assertions.fail();
-                } catch (NumberFormatException e) {
+                } catch (ChainValidationError e) {
                     e.printStackTrace();
                 }
             }
@@ -326,7 +326,7 @@ public class AssertValidatorTest {
                             )
                             .validate();
                     Assertions.fail();
-                } catch (NumberFormatException e) {
+                } catch (ChainValidationError e) {
                     e.printStackTrace();
                 }
             }
@@ -460,7 +460,7 @@ public class AssertValidatorTest {
                             )
                             .validate();
                     Assertions.fail();
-                } catch (NumberFormatException e) {
+                } catch (ChainValidationError e) {
                     e.printStackTrace();
                 }
             }
@@ -556,7 +556,7 @@ public class AssertValidatorTest {
                             )
                             .validate();
                     Assertions.fail();
-                } catch (NumberFormatException e) {
+                } catch (ChainValidationError e) {
                     e.printStackTrace();
                 }
             }
@@ -607,7 +607,95 @@ public class AssertValidatorTest {
         @Feature("Soft")
         @Story("Null")
         class Null {
+            @Test
+            @DisplayName("Успешный")
+            public void assertNullSoft1() {
+                ValidatorFabric.beginAssertValidation()
+                        .assertNullSoft("Успешный", null)
+                        .validate();
+            }
 
+            @Test
+            @DisplayName("Проваленный с ошибкой от AssertJ")
+            public void assertNullSoft2() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .assertNullSoft("Проваленный с ошибкой от AssertJ", new Object())
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный с кастомной ошибкой.")
+            public void assertNullSoft3() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .assertNullSoft("Проваленный с кастомной ошибкой", new Object(), "Моя ошибка")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный, с передачей функции. Ошибка в функции.")
+            public void assertNullSoft4() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .assertNullSoft(
+                                    "Проваленный, функцией с аллюром. Функция с ошибкой.",
+                                    throwExceptionBoolean("Actual Function")
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный, с передачей функции. Без ошибки в функции.")
+            public void assertNullSoft5() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .assertNullSoft(
+                                    "Проваленный, функцией с аллюром. Функция успешна.",
+                                    supplierBoolean("Function", true)
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный, две упали, одна прошла..")
+            public void assertNullSoft6() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .assertNullSoft(
+                                    "Проваленная 1",
+                                    true
+                            )
+                            .assertNullSoft(
+                                    "Успешная",
+                                    null
+                            )
+                            .assertNullSoft(
+                                    "Проваленная 2",
+                                    true
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         @Nested
@@ -615,7 +703,98 @@ public class AssertValidatorTest {
         @Feature("Soft")
         @Story("Not null")
         class NotNull {
+            @Test
+            @DisplayName("Успешный")
+            public void assertNotNullSoft1() {
+                ValidatorFabric.beginAssertValidation()
+                        .assertNotNullSoft("Успешный", new Object())
+                        .validate();
+            }
 
+            @Test
+            @DisplayName("Проваленный с ошибкой от AssertJ")
+            public void assertNotNullSoft2() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .assertNotNullSoft("Проваленный с ошибкой от AssertJ", null)
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный с кастомной ошибкой.")
+            public void assertNotNullSoft3() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .assertNotNullSoft("Проваленный с кастомной ошибкой", null, "Моя ошибка")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный, с передачей функции. Ошибка в функции.")
+            public void assertNotNullSoft4() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .assertNotNullSoft(
+                                    "Проваленный, функцией с аллюром. Функция с ошибкой.",
+                                    throwExceptionBoolean("Actual Function")
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный, с передачей функции. Без ошибки в функции.")
+            public void assertNotNullSoft5() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .assertNotNullSoft(
+                                    "Проваленный, функцией с аллюром. Функция успешна.",
+                                    () -> {
+                                        Allure.step("Function");
+                                        return null;
+                                    }
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный, две упали, одна прошла..")
+            public void assertNotNullSoft6() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .assertNotNullSoft(
+                                    "Проваленная 1",
+                                    null
+                            )
+                            .assertNotNullSoft(
+                                    "Успешная",
+                                    new Object()
+                            )
+                            .assertNotNullSoft(
+                                    "Проваленная 2",
+                                    null
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

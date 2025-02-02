@@ -158,6 +158,7 @@ public class BodyValidation {
             createAllureStepErrorMessage(allureErrorMessage);
             currentValidation.exitStepWithStopTime(Status.FAILED);
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         } catch (Exception e) {
             if (e instanceof IllegalStateException && e.getMessage().contains("but no content-type was defined")) {
                 createAllureStepWhenNotDefineContentType();
@@ -168,6 +169,7 @@ public class BodyValidation {
             }
             currentValidation.exitStepWithStopTime(Status.FAILED);
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         }
     }
 
@@ -186,6 +188,7 @@ public class BodyValidation {
             currentValidation.exitStepWithStopTime(Status.FAILED);
             addErrorWhenNotAssertJsonSchema();
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         }
     }
 
@@ -205,22 +208,26 @@ public class BodyValidation {
             currentValidation.exitStepWithStopTime(Status.FAILED);
             errorManager.getErrors().add(e);
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         } catch (ReadFileError e) {
             AllureStepValidator.doStep("Ошибка чтения файла", Status.FAILED, allureConfig.isDisableMessageErrorAllure());
             currentValidation.exitStepWithStopTime(Status.FAILED);
             errorManager.getErrors().add(e);
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         } catch (ReadTreeError e) {
             AllureStepValidator.doStep("Ошибка при попытке парсинга ответа или файла", Status.FAILED,
                     allureConfig.isDisableMessageErrorAllure());
             currentValidation.exitStepWithStopTime(Status.FAILED);
             errorManager.getErrors().add(e);
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         } catch (AssertionError e) {
             AllureStepValidator.doStep("Файл и ответ не равны", Status.FAILED, allureConfig.isDisableMessageErrorAllure());
             currentValidation.exitStepWithStopTime(Status.FAILED);
             errorManager.getErrors().add(e);
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         }
     }
 

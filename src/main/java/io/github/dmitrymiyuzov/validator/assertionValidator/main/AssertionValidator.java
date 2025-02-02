@@ -511,21 +511,29 @@ public class AssertionValidator implements
         return this;
     }
     @Override
-    public AssertionValidator assertNull(String allureStepName, Supplier<Object> object) {
-        this.validator.getAssertValidation().validation(
-                allureStepName,
-                () -> Assertions.assertThat(object.get()).isNull()
-        );
-        return this;
+    public <T> AssertionValidator assertNull(String allureStepName, Supplier<T> object) {
+        if (object == null) {
+            return assertNull(allureStepName, (Object) null);
+        } else {
+            this.validator.getAssertValidation().validation(
+                    allureStepName,
+                    () -> Assertions.assertThat(object.get()).isNull()
+            );
+            return this;
+        }
     }
     @Override
-    public AssertionValidator assertNull(String allureStepName, Supplier<Object> object, String errorMessage) {
-        this.validator.getAssertValidation().validation(
-                allureStepName,
-                () -> Assertions.assertThat(object.get()).withFailMessage(errorMessage).isNull(),
-                errorMessage
-        );
-        return this;
+    public <T> AssertionValidator assertNull(String allureStepName, Supplier<T> object, String errorMessage) {
+        if (object == null) {
+            return assertNull(allureStepName, (Object) null);
+        } else {
+            this.validator.getAssertValidation().validation(
+                    allureStepName,
+                    () -> Assertions.assertThat(object.get()).withFailMessage(errorMessage).isNull(),
+                    errorMessage
+            );
+            return this;
+        }
     }
     @Override
     public AssertionValidator assertNullSoft(String allureStepName, Object object) {
@@ -545,21 +553,29 @@ public class AssertionValidator implements
         return this;
     }
     @Override
-    public AssertionValidator assertNullSoft(String allureStepName, Supplier<Object> object) {
-        this.validator.getAssertValidation().validationSoft(
-                allureStepName,
-                () -> Assertions.assertThat(object.get()).isNull()
-        );
-        return this;
+    public <T> AssertionValidator assertNullSoft(String allureStepName, Supplier<T> object) {
+        if (object == null) {
+            return assertNullSoft(allureStepName, (Object) null);
+        } else {
+            this.validator.getAssertValidation().validationSoft(
+                    allureStepName,
+                    () -> Assertions.assertThat(object.get()).isNull()
+            );
+            return this;
+        }
     }
     @Override
-    public AssertionValidator assertNullSoft(String allureStepName, Supplier<Object> object, String errorMessage) {
-        this.validator.getAssertValidation().validationSoft(
-                allureStepName,
-                () -> Assertions.assertThat(object.get()).withFailMessage(errorMessage).isNull(),
-                errorMessage
-        );
-        return this;
+    public <T> AssertionValidator assertNullSoft(String allureStepName, Supplier<T> object, String errorMessage) {
+        if (object == null) {
+            return assertNullSoft(allureStepName, (Object) null, errorMessage);
+        } else {
+            this.validator.getAssertValidation().validationSoft(
+                    allureStepName,
+                    () -> Assertions.assertThat(object.get()).withFailMessage(errorMessage).isNull(),
+                    errorMessage
+            );
+            return this;
+        }
     }
 
     /******************************************NOT NULL*************************************/
@@ -581,21 +597,29 @@ public class AssertionValidator implements
         return this;
     }
     @Override
-    public AssertionValidator assertNotNull(String allureStepName, Supplier<Object> object) {
-        this.validator.getAssertValidation().validation(
-                allureStepName,
-                () -> Assertions.assertThat(object.get()).isNotNull()
-        );
-        return this;
+    public <T> AssertionValidator assertNotNull(String allureStepName, Supplier<T> object) {
+        if (object == null) {
+            return assertNotNull(allureStepName, (Object) null);
+        } else {
+            this.validator.getAssertValidation().validation(
+                    allureStepName,
+                    () -> Assertions.assertThat(object.get()).isNotNull()
+            );
+            return this;
+        }
     }
     @Override
-    public AssertionValidator assertNotNull(String allureStepName, Supplier<Object> object, String errorMessage) {
-        this.validator.getAssertValidation().validation(
-                allureStepName,
-                () -> Assertions.assertThat(object.get()).withFailMessage(errorMessage).isNotNull(),
-                errorMessage
-        );
-        return this;
+    public <T> AssertionValidator assertNotNull(String allureStepName, Supplier<T> object, String errorMessage) {
+        if (object == null) {
+            return assertNotNull(allureStepName, (Object) null, errorMessage);
+        } else {
+            this.validator.getAssertValidation().validation(
+                    allureStepName,
+                    () -> Assertions.assertThat(object.get()).withFailMessage(errorMessage).isNotNull(),
+                    errorMessage
+            );
+            return this;
+        }
     }
     @Override
     public AssertionValidator assertNotNullSoft(String allureStepName, Object object) {
@@ -615,21 +639,29 @@ public class AssertionValidator implements
         return this;
     }
     @Override
-    public AssertionValidator assertNotNullSoft(String allureStepName, Supplier<Object> object) {
-        this.validator.getAssertValidation().validationSoft(
-                allureStepName,
-                () -> Assertions.assertThat(object.get()).isNotNull()
-        );
-        return this;
+    public <T> AssertionValidator assertNotNullSoft(String allureStepName, Supplier<T> object) {
+        if (object == null) {
+            return assertNotNullSoft(allureStepName, (Object) null);
+        } else {
+            this.validator.getAssertValidation().validationSoft(
+                    allureStepName,
+                    () -> Assertions.assertThat(object.get()).isNotNull()
+            );
+            return this;
+        }
     }
     @Override
-    public AssertionValidator assertNotNullSoft(String allureStepName, Supplier<Object> object, String errorMessage) {
-        this.validator.getAssertValidation().validationSoft(
-                allureStepName,
-                () -> Assertions.assertThat(object.get()).withFailMessage(errorMessage).isNotNull(),
-                errorMessage
-        );
-        return this;
+    public <T> AssertionValidator assertNotNullSoft(String allureStepName, Supplier<T> object, String errorMessage) {
+        if (object == null) {
+            return assertNotNullSoft(allureStepName, (Object) null, errorMessage);
+        } else {
+            this.validator.getAssertValidation().validationSoft(
+                    allureStepName,
+                    () -> Assertions.assertThat(object.get()).withFailMessage(errorMessage).isNotNull(),
+                    errorMessage
+            );
+            return this;
+        }
     }
 
     /******************************************LOCAL DATE TIME*************************************/

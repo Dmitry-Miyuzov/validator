@@ -37,6 +37,12 @@ public class AssertValidation {
             validator.exitMainAllureStep(Status.FAILED);
             addErrorAssertionToPool(e.getMessage());
             errorManager.throwExceptionBroken();
+        } catch (Exception e) {
+            createAllureStepErrorMessage(errorMessage, e);
+            currentValidation.exitStepWithStopTime(Status.BROKEN);
+            validator.exitMainAllureStep(Status.BROKEN);
+            addErrorAssertionToPool(e.getMessage());
+            errorManager.throwExceptionBroken();
         }
     }
 
@@ -44,21 +50,30 @@ public class AssertValidation {
         validation(allureStepName, runnable, null);
     }
 
-    public void validationThatCodeDoesNotException(String allureStepName, ThrowingCallable call, String errorMessageAllure) {
+    public void validationSoft(String allureStepName, Runnable runnable, String errorMessage) {
         AllureStepValidator currentValidation = AllureStepValidator.beginStep(allureStepName, allureConfig.isDisableValidationNameAllure());
         try {
             errorManager.increaseCountValidation();
-            call.call();
+            runnable.run();
             currentValidation.exitStepWithStopTime(Status.PASSED);
-        } catch (Throwable e) {
-            if (errorMessageAllure != null) {
-                createAllureStepErrorMessage(errorMessageAllure, e);
-            }
+        } catch (AssertionError e) {
+            createAllureStepErrorMessage(errorMessage, e);
             currentValidation.exitStepWithStopTime(Status.FAILED);
-            validator.exitMainAllureStep(Status.FAILED);
             addErrorAssertionToPool(e.getMessage());
-            errorManager.throwExceptionBroken();
+            errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
+        } catch (Exception e) {
+            createAllureStepErrorMessage(errorMessage, e);
+            currentValidation.exitStepWithStopTime(Status.BROKEN);
+            addErrorAssertionToPool(e.getMessage());
+            errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.BROKEN);
         }
+    }
+
+    public void validationSoft(String allureStepName, Runnable runnable) {
+        validationSoft(allureStepName, runnable, null);
+
     }
 
     public void validationDate(String allureStepName, Runnable runnable) {
@@ -81,25 +96,6 @@ public class AssertValidation {
         }
     }
 
-    public void validationSoft(String allureStepName, Runnable runnable, String errorMessage) {
-        AllureStepValidator currentValidation = AllureStepValidator.beginStep(allureStepName, allureConfig.isDisableValidationNameAllure());
-        try {
-            errorManager.increaseCountValidation();
-            runnable.run();
-            currentValidation.exitStepWithStopTime(Status.PASSED);
-        } catch (AssertionError e) {
-            createAllureStepErrorMessage(errorMessage, e);
-            currentValidation.exitStepWithStopTime(Status.FAILED);
-            addErrorAssertionToPool(e.getMessage());
-            errorManager.setSoftAssert(true);
-        }
-    }
-
-    public void validationSoft(String allureStepName, Runnable runnable) {
-        validationSoft(allureStepName, runnable, null);
-
-    }
-
     public void validationDateSoft(String allureStepName, Runnable runnable) {
         AllureStepValidator currentValidation = AllureStepValidator.beginStep(allureStepName, allureConfig.isDisableValidationNameAllure());
         try {
@@ -117,6 +113,24 @@ public class AssertValidation {
             currentValidation.exitStepWithStopTime(Status.FAILED);
             addErrorAssertionToPool(e.getMessage());
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
+        }
+    }
+
+    public void validationThatCodeDoesNotException(String allureStepName, ThrowingCallable call, String errorMessageAllure) {
+        AllureStepValidator currentValidation = AllureStepValidator.beginStep(allureStepName, allureConfig.isDisableValidationNameAllure());
+        try {
+            errorManager.increaseCountValidation();
+            call.call();
+            currentValidation.exitStepWithStopTime(Status.PASSED);
+        } catch (Throwable e) {
+            if (errorMessageAllure != null) {
+                createAllureStepErrorMessage(errorMessageAllure, e);
+            }
+            currentValidation.exitStepWithStopTime(Status.FAILED);
+            validator.exitMainAllureStep(Status.FAILED);
+            addErrorAssertionToPool(e.getMessage());
+            errorManager.throwExceptionBroken();
         }
     }
 
@@ -133,6 +147,7 @@ public class AssertValidation {
             currentValidation.exitStepWithStopTime(Status.FAILED);
             addErrorAssertionToPool(e.getMessage());
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         }
     }
 

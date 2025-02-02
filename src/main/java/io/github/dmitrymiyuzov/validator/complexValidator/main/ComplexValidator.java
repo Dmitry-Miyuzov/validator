@@ -384,13 +384,13 @@ public class ComplexValidator implements
     }
     @Override
     @SuppressWarnings("all")
-    public ComplexValidator assertNull(String allureStepName, Supplier<Object> object) {
+    public <T> ComplexValidator assertNull(String allureStepName, Supplier<T> object) {
         this.assertionValidator.assertNull(allureStepName, object);
         return this;
     }
     @Override
     @SuppressWarnings("all")
-    public ComplexValidator assertNull(String allureStepName, Supplier<Object> object, String errorMessage) {
+    public <T> ComplexValidator assertNull(String allureStepName, Supplier<T> object, String errorMessage) {
         this.assertionValidator.assertNull(allureStepName, object, errorMessage);
         return this;
     }
@@ -408,13 +408,13 @@ public class ComplexValidator implements
     }
     @Override
     @SuppressWarnings("all")
-    public ComplexValidator assertNullSoft(String allureStepName, Supplier<Object> object) {
+    public <T> ComplexValidator assertNullSoft(String allureStepName, Supplier<T> object) {
         this.assertionValidator.assertNullSoft(allureStepName, object);
         return this;
     }
     @Override
     @SuppressWarnings("all")
-    public ComplexValidator assertNullSoft(String allureStepName, Supplier<Object> object, String errorMessage) {
+    public <T> ComplexValidator assertNullSoft(String allureStepName, Supplier<T> object, String errorMessage) {
         this.assertionValidator.assertNullSoft(allureStepName, object, errorMessage);
         return this;
     }
@@ -434,13 +434,13 @@ public class ComplexValidator implements
     }
     @Override
     @SuppressWarnings("all")
-    public ComplexValidator assertNotNull(String allureStepName, Supplier<Object> object) {
+    public <T> ComplexValidator assertNotNull(String allureStepName, Supplier<T> object) {
         this.assertionValidator.assertNotNull(allureStepName, object);
         return this;
     }
     @Override
     @SuppressWarnings("all")
-    public ComplexValidator assertNotNull(String allureStepName, Supplier<Object> object, String errorMessage) {
+    public <T> ComplexValidator assertNotNull(String allureStepName, Supplier<T> object, String errorMessage) {
         this.assertionValidator.assertNotNull(allureStepName, object, errorMessage);
         return this;
     }
@@ -458,13 +458,13 @@ public class ComplexValidator implements
     }
     @Override
     @SuppressWarnings("all")
-    public ComplexValidator assertNotNullSoft(String allureStepName, Supplier<Object> object) {
+    public <T> ComplexValidator assertNotNullSoft(String allureStepName, Supplier<T> object) {
         this.assertionValidator.assertNotNullSoft(allureStepName, object);
         return this;
     }
     @Override
     @SuppressWarnings("all")
-    public ComplexValidator assertNotNullSoft(String allureStepName, Supplier<Object> object, String errorMessage) {
+    public <T> ComplexValidator assertNotNullSoft(String allureStepName, Supplier<T> object, String errorMessage) {
         this.assertionValidator.assertNotNullSoft(allureStepName, object, errorMessage);
         return this;
     }

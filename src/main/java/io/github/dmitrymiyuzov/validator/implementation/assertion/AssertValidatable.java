@@ -82,9 +82,9 @@ public interface AssertValidatable<R> {
     @CheckReturnValue
     R assertNull(String allureStepName, Object object, String errorMessage);
     @CheckReturnValue
-    R assertNull(String allureStepName, Supplier<Object> object);
+    <T> R assertNull(String allureStepName, Supplier<T> object);
     @CheckReturnValue
-    R assertNull(String allureStepName, Supplier<Object> object, String errorMessage);
+    <T> R assertNull(String allureStepName, Supplier<T> object, String errorMessage);
 
 
     /******************************************NOT NULL*************************************/
@@ -93,9 +93,9 @@ public interface AssertValidatable<R> {
     @CheckReturnValue
     R assertNotNull(String allureStepName, Object object, String errorMessage);
     @CheckReturnValue
-    R assertNotNull(String allureStepName, Supplier<Object> object);
+    <T> R assertNotNull(String allureStepName, Supplier<T> object);
     @CheckReturnValue
-    R assertNotNull(String allureStepName, Supplier<Object> object, String errorMessage);
+    <T> R assertNotNull(String allureStepName, Supplier<T> object, String errorMessage);
 
     /******************************************LOCAL DATE TIME*************************************/
     R assertLocalDateTime(String nameActualDate, String nameExpectedDate,
