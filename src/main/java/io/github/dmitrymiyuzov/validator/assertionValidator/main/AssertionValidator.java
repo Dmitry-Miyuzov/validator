@@ -511,7 +511,7 @@ public class AssertionValidator implements
         return this;
     }
     @Override
-    public <T> AssertionValidator assertNull(String allureStepName, Supplier<T> object) {
+    public AssertionValidator assertNull(String allureStepName, Supplier<?> object) {
         if (object == null) {
             return assertNull(allureStepName, (Object) null);
         } else {
@@ -523,7 +523,7 @@ public class AssertionValidator implements
         }
     }
     @Override
-    public <T> AssertionValidator assertNull(String allureStepName, Supplier<T> object, String errorMessage) {
+    public AssertionValidator assertNull(String allureStepName, Supplier<?> object, String errorMessage) {
         if (object == null) {
             return assertNull(allureStepName, (Object) null);
         } else {
@@ -553,7 +553,7 @@ public class AssertionValidator implements
         return this;
     }
     @Override
-    public <T> AssertionValidator assertNullSoft(String allureStepName, Supplier<T> object) {
+    public AssertionValidator assertNullSoft(String allureStepName, Supplier<?> object) {
         if (object == null) {
             return assertNullSoft(allureStepName, (Object) null);
         } else {
@@ -565,7 +565,7 @@ public class AssertionValidator implements
         }
     }
     @Override
-    public <T> AssertionValidator assertNullSoft(String allureStepName, Supplier<T> object, String errorMessage) {
+    public AssertionValidator assertNullSoft(String allureStepName, Supplier<?> object, String errorMessage) {
         if (object == null) {
             return assertNullSoft(allureStepName, (Object) null, errorMessage);
         } else {
@@ -597,7 +597,7 @@ public class AssertionValidator implements
         return this;
     }
     @Override
-    public <T> AssertionValidator assertNotNull(String allureStepName, Supplier<T> object) {
+    public AssertionValidator assertNotNull(String allureStepName, Supplier<?> object) {
         if (object == null) {
             return assertNotNull(allureStepName, (Object) null);
         } else {
@@ -609,7 +609,7 @@ public class AssertionValidator implements
         }
     }
     @Override
-    public <T> AssertionValidator assertNotNull(String allureStepName, Supplier<T> object, String errorMessage) {
+    public AssertionValidator assertNotNull(String allureStepName, Supplier<?> object, String errorMessage) {
         if (object == null) {
             return assertNotNull(allureStepName, (Object) null, errorMessage);
         } else {
@@ -639,7 +639,7 @@ public class AssertionValidator implements
         return this;
     }
     @Override
-    public <T> AssertionValidator assertNotNullSoft(String allureStepName, Supplier<T> object) {
+    public AssertionValidator assertNotNullSoft(String allureStepName, Supplier<?> object) {
         if (object == null) {
             return assertNotNullSoft(allureStepName, (Object) null);
         } else {
@@ -651,7 +651,7 @@ public class AssertionValidator implements
         }
     }
     @Override
-    public <T> AssertionValidator assertNotNullSoft(String allureStepName, Supplier<T> object, String errorMessage) {
+    public AssertionValidator assertNotNullSoft(String allureStepName, Supplier<?> object, String errorMessage) {
         if (object == null) {
             return assertNotNullSoft(allureStepName, (Object) null, errorMessage);
         } else {

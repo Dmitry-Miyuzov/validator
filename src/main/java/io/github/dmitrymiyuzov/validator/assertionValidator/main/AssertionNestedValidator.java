@@ -180,12 +180,12 @@ public class AssertionNestedValidator implements
         return this;
     }
     @Override
-    public <T> AssertionNestedValidator assertNullSoft(String allureStepName, Supplier<T> object) {
+    public AssertionNestedValidator assertNullSoft(String allureStepName, Supplier<?> object) {
         assertionValidator.assertNullSoft(allureStepName, object);
         return this;
     }
     @Override
-    public <T> AssertionNestedValidator assertNullSoft(String allureStepName, Supplier<T> object, String errorMessage) {
+    public AssertionNestedValidator assertNullSoft(String allureStepName, Supplier<?> object, String errorMessage) {
         assertionValidator.assertNullSoft(allureStepName, object, errorMessage);
         return this;
     }
@@ -202,12 +202,12 @@ public class AssertionNestedValidator implements
         return this;
     }
     @Override
-    public <T> AssertionNestedValidator assertNotNullSoft(String allureStepName, Supplier<T> object) {
+    public AssertionNestedValidator assertNotNullSoft(String allureStepName, Supplier<?> object) {
         assertionValidator.assertNotNullSoft(allureStepName, object);
         return this;
     }
     @Override
-    public <T> AssertionNestedValidator assertNotNullSoft(String allureStepName, Supplier<T> object, String errorMessage) {
+    public AssertionNestedValidator assertNotNullSoft(String allureStepName, Supplier<?> object, String errorMessage) {
         assertionValidator.assertNotNullSoft(allureStepName, object, errorMessage);
         return this;
     }
