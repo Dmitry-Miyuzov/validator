@@ -117,35 +117,41 @@ public class AssertValidation {
         }
     }
 
-    public void validationThatCodeDoesNotException(String allureStepName, ThrowingCallable call, String errorMessageAllure) {
+    public void validationThatCodeDoesNotException(String allureStepName, ThrowingCallable call, String errorMessage) {
         AllureStepValidator currentValidation = AllureStepValidator.beginStep(allureStepName, allureConfig.isDisableValidationNameAllure());
         try {
             errorManager.increaseCountValidation();
             call.call();
             currentValidation.exitStepWithStopTime(Status.PASSED);
         } catch (Throwable e) {
-            if (errorMessageAllure != null) {
-                createAllureStepErrorMessage(errorMessageAllure, e);
-            }
+            createAllureStepErrorMessage(errorMessage, e);
             currentValidation.exitStepWithStopTime(Status.FAILED);
             validator.exitMainAllureStep(Status.FAILED);
-            addErrorAssertionToPool(e.getMessage());
+
+            if (errorMessage == null) {
+                addErrorAssertionToPool(e.getMessage());
+            } else {
+                addErrorAssertionToPool(errorMessage);
+            }
+
             errorManager.throwExceptionBroken();
         }
     }
 
-    public void validationThatCodeDoesNotExceptionSoft(String allureStepName, ThrowingCallable call, String errorMessageAllure) {
+    public void validationThatCodeDoesNotExceptionSoft(String allureStepName, ThrowingCallable call, String errorMessage) {
         AllureStepValidator currentValidation = AllureStepValidator.beginStep(allureStepName, allureConfig.isDisableValidationNameAllure());
         try {
             errorManager.increaseCountValidation();
             call.call();
             currentValidation.exitStepWithStopTime(Status.PASSED);
         } catch (Throwable e) {
-            if (errorMessageAllure != null) {
-                createAllureStepErrorMessage(errorMessageAllure, e);
+            createAllureStepErrorMessage(errorMessage, e);
+            if (errorMessage != null) {
+                addErrorAssertionToPool(errorMessage);
+            } else {
+                addErrorAssertionToPool(e.getMessage());
             }
             currentValidation.exitStepWithStopTime(Status.FAILED);
-            addErrorAssertionToPool(e.getMessage());
             errorManager.setSoftAssert(true);
             validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         }

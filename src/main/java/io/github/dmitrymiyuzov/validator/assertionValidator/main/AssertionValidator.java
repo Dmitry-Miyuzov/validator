@@ -68,11 +68,11 @@ public class AssertionValidator implements
         return this;
     }
     @Override
-    public AssertionValidator assertThatCodeDoesNotExceptionSoft(String allureStepName, ThrowingCallable call, String errorMessageAllure) {
+    public AssertionValidator assertThatCodeDoesNotExceptionSoft(String allureStepName, ThrowingCallable call, String errorMessage) {
         this.validator.getAssertValidation().validationThatCodeDoesNotExceptionSoft(
                 allureStepName,
                 call,
-                errorMessageAllure
+                errorMessage
         );
         return this;
     }

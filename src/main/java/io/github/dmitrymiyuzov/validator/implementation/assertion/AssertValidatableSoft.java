@@ -16,7 +16,7 @@ public interface AssertValidatableSoft<R> {
     @CheckReturnValue
     R assertThatCodeDoesNotExceptionSoft(String allureStepName, ThrowingCallable call);
     @CheckReturnValue
-    R assertThatCodeDoesNotExceptionSoft(String allureStepName, ThrowingCallable call, String errorMessageAllure);
+    R assertThatCodeDoesNotExceptionSoft(String allureStepName, ThrowingCallable call, String errorMessage);
 
     /******************************************EQUALS SOFT*************************************/
     @CheckReturnValue

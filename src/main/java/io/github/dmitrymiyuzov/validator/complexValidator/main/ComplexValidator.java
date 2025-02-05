@@ -68,8 +68,8 @@ public class ComplexValidator implements
     }
     @Override
     @SuppressWarnings("all")
-    public ComplexValidator assertThatCodeDoesNotExceptionSoft(String allureStepName, ThrowingCallable call, String errorMessageAllure) {
-        this.assertionValidator.assertThatCodeDoesNotExceptionSoft(allureStepName, call, errorMessageAllure);
+    public ComplexValidator assertThatCodeDoesNotExceptionSoft(String allureStepName, ThrowingCallable call, String errorMessage) {
+        this.assertionValidator.assertThatCodeDoesNotExceptionSoft(allureStepName, call, errorMessage);
         return this;
     }
 

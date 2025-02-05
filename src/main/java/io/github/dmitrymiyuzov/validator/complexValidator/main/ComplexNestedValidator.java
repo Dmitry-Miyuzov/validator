@@ -41,8 +41,8 @@ public class ComplexNestedValidator implements
     }
     @Override
     @SuppressWarnings("all")
-    public ComplexNestedValidator assertThatCodeDoesNotExceptionSoft(String allureStepName, ThrowingCallable call, String errorMessageAllure) {
-        complexValidator.assertThatCodeDoesNotExceptionSoft(allureStepName, call, errorMessageAllure);
+    public ComplexNestedValidator assertThatCodeDoesNotExceptionSoft(String allureStepName, ThrowingCallable call, String errorMessage) {
+        complexValidator.assertThatCodeDoesNotExceptionSoft(allureStepName, call, errorMessage);
         return this;
     }
 

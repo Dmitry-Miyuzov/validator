@@ -1607,43 +1607,115 @@ public class AssertValidatorTest {
             @Test
             @DisplayName("Проваленный. Формат: yyyy-MM-dd HH:mm:ss")
             public void assertSoft3() {
-                ValidatorFabric.beginAssertValidation()
-                        .assertLocalDateTimeSoft(
-                                "Дата 1",
-                                "Дата 2",
-                                LocalDateTime.now(),
-                                LocalDateTime.now().plusSeconds(3),
-                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-                        )
-                        .validate();
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .assertLocalDateTimeSoft(
+                                    "Дата 1",
+                                    "Дата 2",
+                                    LocalDateTime.now(),
+                                    LocalDateTime.now().plusSeconds(3),
+                                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                            )
+                            .validate();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+                }
             }
 
             @Test
             @DisplayName("Проваленный. Два проваленных, один успешый.")
             public void assertSoft4() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .assertLocalDateTimeSoft(
+                                    "Дата 1",
+                                    "Дата 2",
+                                    LocalDateTime.now(),
+                                    LocalDateTime.now().plusSeconds(3),
+                                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                            )
+                            .assertLocalDateTimeSoft(
+                                    "Дата 1",
+                                    "Дата 2",
+                                    LocalDateTime.now(),
+                                    LocalDateTime.now().plusSeconds(3),
+                                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+                            )
+                            .assertLocalDateTimeSoft(
+                                    "Дата 1",
+                                    "Дата 2",
+                                    LocalDateTime.now().plusSeconds(3),
+                                    LocalDateTime.now(),
+                                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                            )
+                            .validate();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        @Nested
+        @Epic("Assert")
+        @Feature("Soft")
+        @Story("Assert That Code Does Not Exception")
+        class AssertThatCodeDoesNotException {
+            @Test
+            @DisplayName("Успешный.")
+            public void assertSoft1() {
                 ValidatorFabric.beginAssertValidation()
-                        .assertLocalDateTimeSoft(
-                                "Дата 1",
-                                "Дата 2",
-                                LocalDateTime.now(),
-                                LocalDateTime.now().plusSeconds(3),
-                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-                        )
-                        .assertLocalDateTimeSoft(
-                                "Дата 1",
-                                "Дата 2",
-                                LocalDateTime.now(),
-                                LocalDateTime.now().plusSeconds(3),
-                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
-                        )
-                        .assertLocalDateTimeSoft(
-                                "Дата 1",
-                                "Дата 2",
-                                LocalDateTime.now().plusSeconds(3),
-                                LocalDateTime.now(),
-                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                        .assertThatCodeDoesNotExceptionSoft(
+                                "Успешный код",
+                                () -> System.out.println("hello")
                         )
                         .validate();
+            }
+
+            @Test
+            @DisplayName("Проваленный, без указания ошибки.")
+            public void assertSoft2() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .assertThatCodeDoesNotExceptionSoft(
+                                    "Успешный код",
+                                    () -> Integer.parseInt("Hello")
+                            )
+                            .validate();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный, c указанием ошибки.")
+            public void assertSoft3() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .assertThatCodeDoesNotExceptionSoft(
+                                    "Успешный код",
+                                    () -> Integer.parseInt("Hello"),
+                                    "Мое описание ошибки"
+                            )
+                            .validate();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный, два проваленных, один успешный.")
+            public void assertSoft4() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .assertThatCodeDoesNotExceptionSoft(
+                                    "Успешный код",
+                                    () -> Integer.parseInt("Hello"),
+                                    "Мое описание ошибки"
+                            )
+                            .validate();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

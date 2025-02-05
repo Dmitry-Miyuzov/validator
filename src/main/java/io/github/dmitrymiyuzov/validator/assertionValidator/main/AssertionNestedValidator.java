@@ -35,8 +35,8 @@ public class AssertionNestedValidator implements
         return this;
     }
     @Override
-    public AssertionNestedValidator assertThatCodeDoesNotExceptionSoft(String allureStepName, ThrowingCallable call, String errorMessageAllure) {
-        assertionValidator.assertThatCodeDoesNotExceptionSoft(allureStepName, call, errorMessageAllure);
+    public AssertionNestedValidator assertThatCodeDoesNotExceptionSoft(String allureStepName, ThrowingCallable call, String errorMessage) {
+        assertionValidator.assertThatCodeDoesNotExceptionSoft(allureStepName, call, errorMessage);
         return this;
     }
 
