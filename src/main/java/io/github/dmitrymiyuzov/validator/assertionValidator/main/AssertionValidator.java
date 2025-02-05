@@ -683,7 +683,7 @@ public class AssertionValidator implements
             );
 
             Assertions.assertThat(actualDate).withFailMessage("Актуальная дата - %s, Ожидаемая дата - %s".formatted(actualDate, expectedDate))
-                    .isEqualTo(expected);
+                    .isEqualTo(expectedDate);
         };
     }
     @Override

@@ -8,10 +8,16 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Assertions;
 
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.function.Supplier;
 
 public class AssertValidatorTest {
@@ -1562,6 +1568,82 @@ public class AssertValidatorTest {
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
                 }
+            }
+        }
+
+        @Nested
+        @Epic("Assert")
+        @Feature("Soft")
+        @Story("Local Date Time")
+        class AssertLocalDateTime {
+            @Test
+            @DisplayName("Успешный. Формат: yyyy-MM-dd")
+            public void assertSoft1() {
+                ValidatorFabric.beginAssertValidation()
+                        .assertLocalDateTimeSoft(
+                                "Дата 1",
+                                "Дата 2",
+                                LocalDateTime.now(),
+                                LocalDateTime.now().plusSeconds(3),
+                                DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                        )
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Успешный. Формат: yyyy-MM-dd HH:mm")
+            public void assertSoft2() {
+                ValidatorFabric.beginAssertValidation()
+                        .assertLocalDateTimeSoft(
+                                "Дата 1",
+                                "Дата 2",
+                                LocalDateTime.now(),
+                                LocalDateTime.now().plusSeconds(3),
+                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+                        )
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Проваленный. Формат: yyyy-MM-dd HH:mm:ss")
+            public void assertSoft3() {
+                ValidatorFabric.beginAssertValidation()
+                        .assertLocalDateTimeSoft(
+                                "Дата 1",
+                                "Дата 2",
+                                LocalDateTime.now(),
+                                LocalDateTime.now().plusSeconds(3),
+                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                        )
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Проваленный. Два проваленных, один успешый.")
+            public void assertSoft4() {
+                ValidatorFabric.beginAssertValidation()
+                        .assertLocalDateTimeSoft(
+                                "Дата 1",
+                                "Дата 2",
+                                LocalDateTime.now(),
+                                LocalDateTime.now().plusSeconds(3),
+                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                        )
+                        .assertLocalDateTimeSoft(
+                                "Дата 1",
+                                "Дата 2",
+                                LocalDateTime.now(),
+                                LocalDateTime.now().plusSeconds(3),
+                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+                        )
+                        .assertLocalDateTimeSoft(
+                                "Дата 1",
+                                "Дата 2",
+                                LocalDateTime.now().plusSeconds(3),
+                                LocalDateTime.now(),
+                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                        )
+                        .validate();
             }
         }
     }
