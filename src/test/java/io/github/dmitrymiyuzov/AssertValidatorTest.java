@@ -107,6 +107,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -120,6 +125,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
 
             }
@@ -138,6 +148,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
 
             }
@@ -156,6 +171,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -173,6 +193,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -190,6 +215,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -207,6 +237,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -224,6 +259,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -251,6 +291,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
         }
@@ -279,6 +324,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -292,6 +342,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -309,6 +364,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -326,6 +386,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -343,6 +408,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -360,6 +430,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -377,6 +452,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -394,6 +474,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -421,6 +506,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
         }
@@ -448,6 +538,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -461,6 +556,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -477,6 +577,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -493,6 +598,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -517,6 +627,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
         }
@@ -544,6 +659,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -557,6 +677,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -573,6 +698,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -589,6 +719,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -613,6 +748,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
         }
@@ -640,6 +780,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -653,6 +798,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -669,6 +819,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -685,6 +840,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -709,6 +869,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
         }
@@ -736,6 +901,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -749,6 +919,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -765,6 +940,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -784,6 +964,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -808,6 +993,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
         }
@@ -859,6 +1049,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -878,6 +1073,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -897,6 +1097,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -916,6 +1121,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -935,6 +1145,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -954,6 +1169,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -973,6 +1193,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -992,6 +1217,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1011,6 +1241,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1030,6 +1265,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1061,6 +1301,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
         }
@@ -1112,6 +1357,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1131,6 +1381,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1150,6 +1405,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1169,6 +1429,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1188,6 +1453,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1207,6 +1477,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1226,6 +1501,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1245,6 +1525,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1264,6 +1549,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1283,6 +1573,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1314,6 +1609,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
         }
@@ -1365,6 +1665,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1384,6 +1689,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1403,6 +1713,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1422,6 +1737,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1441,6 +1761,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1460,6 +1785,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1479,6 +1809,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1498,6 +1833,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1517,6 +1857,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1536,6 +1881,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1567,6 +1917,11 @@ public class AssertValidatorTest {
                     Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
         }
@@ -1617,8 +1972,14 @@ public class AssertValidatorTest {
                                     DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                             )
                             .validate();
+                    Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1649,8 +2010,14 @@ public class AssertValidatorTest {
                                     DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                             )
                             .validate();
+                    Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
         }
@@ -1681,8 +2048,14 @@ public class AssertValidatorTest {
                                     () -> Integer.parseInt("Hello")
                             )
                             .validate();
+                    Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1697,8 +2070,14 @@ public class AssertValidatorTest {
                                     "Мое описание ошибки"
                             )
                             .validate();
+                    Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
 
@@ -1712,9 +2091,283 @@ public class AssertValidatorTest {
                                     () -> Integer.parseInt("Hello"),
                                     "Мое описание ошибки"
                             )
+                            .assertThatCodeDoesNotExceptionSoft(
+                                    "Успешный код",
+                                    () -> System.out.println("hello")
+                            )
+                            .assertThatCodeDoesNotExceptionSoft(
+                                    "Успешный код",
+                                    () -> Integer.parseInt("Hello"),
+                                    "Мое описание ошибки 2"
+                            )
                             .validate();
+                    Assertions.fail();
                 } catch (ChainValidationError e) {
                     e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+        }
+
+        @Nested
+        @Epic("Assert")
+        @Feature("Soft")
+        @Story("Group Soft")
+        class GroupSoft {
+            @Test
+            @DisplayName("Успешный. Один уровень вложенности.")
+            public void assertSoft1() {
+                ValidatorFabric.beginAssertValidation()
+                        .groupSoft(
+                                "Первая группа. Первый уровень",
+                                nestedValidator -> nestedValidator
+                                        .assertEqualsSoft("1.1. Первая проверка", 1, 1)
+                                        .assertEqualsSoft("1.1. Вторая проверка", 1, 1)
+                                        .assertEqualsSoft("1.1. Третья проверка", 1, 1)
+                        )
+                        .groupSoft(
+                                "Вторая группа. Первый уровень",
+                                nestedValidator -> nestedValidator
+                                        .assertEqualsSoft("2.1. Первая проверка", 1, 1)
+                                        .assertEqualsSoft("2.1. Вторая проверка", 1, 1)
+                                        .assertEqualsSoft("2.1. Третья проверка", 1, 1)
+                        )
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Успешный. Два уровня вложенности.")
+            public void assertSoft2() {
+                ValidatorFabric.beginAssertValidation()
+                        .groupSoft(
+                                "Первая группа. Первый уровень",
+                                nestedValidator -> nestedValidator
+                                        .assertEqualsSoft("1.1. Первая проверка", 1, 1)
+                                        .assertEqualsSoft("1.1. Вторая проверка", 1, 1)
+                                        .assertEqualsSoft("1.1. Третья проверка", 1, 1)
+                                        .groupSoft(
+                                                "Первая группа. Второй уровень",
+                                                nestedValidator2 -> nestedValidator2
+                                                        .assertEqualsSoft("1.2. Первая проверка", 1, 1)
+                                                        .assertEqualsSoft("1.2. Вторая проверка", 1, 1)
+                                                        .assertEqualsSoft("1.2. Третья проверка", 1, 1)
+                                                )
+                        )
+                        .groupSoft(
+                                "Вторая группа. Первый уровень",
+                                nestedValidator -> nestedValidator
+                                        .assertEqualsSoft("2.1. Первая проверка", 1, 1)
+                                        .assertEqualsSoft("2.1. Вторая проверка", 1, 1)
+                                        .assertEqualsSoft("2.1. Третья проверка", 1, 1)
+                                        .groupSoft(
+                                                "Вторая группа. Второй уровень",
+                                                nestedValidator2 -> nestedValidator2
+                                                        .assertEqualsSoft("2.2. Первая проверка", 1, 1)
+                                                        .assertEqualsSoft("2.2. Вторая проверка", 1, 1)
+                                                        .assertEqualsSoft("2.2. Третья проверка", 1, 1)
+                                        )
+                        )
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Проваленный. Один уровень вложенности. Одна из групп провалена.")
+            public void assertSoft3() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .groupSoft(
+                                    "Первая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .assertEqualsSoft("1.1. Первая проверка", 1, 1)
+                                            .assertEqualsSoft("1.1. Вторая проверка", 1, 1)
+                                            .assertEqualsSoft("1.1. Третья проверка", 1, 2)
+                            )
+                            .groupSoft(
+                                    "Вторая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .assertEqualsSoft("2.1. Первая проверка", 1, 1)
+                                            .assertEqualsSoft("2.1. Вторая проверка", 1, 1)
+                                            .assertEqualsSoft("2.1. Третья проверка", 1, 1)
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 6;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Один уровень вложенности. Две группы провалены.")
+            public void assertSoft4() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .groupSoft(
+                                    "Первая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .assertEqualsSoft("1.1. Первая проверка", 1, 1)
+                                            .assertEqualsSoft("1.1. Вторая проверка", 1, 1)
+                                            .assertEqualsSoft("1.1. Третья проверка", 1, 2)
+                            )
+                            .groupSoft(
+                                    "Вторая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .assertEqualsSoft("2.1. Первая проверка", 1, 1)
+                                            .assertEqualsSoft("2.1. Вторая проверка", 1, 2)
+                                            .assertEqualsSoft("2.1. Третья проверка", 1, 1)
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 6;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Два уровня вложенности. Одна из групп провалена.")
+            public void assertSoft5() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .groupSoft(
+                                    "Первая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .assertEqualsSoft("1.1. Первая проверка", 1, 1)
+                                            .assertEqualsSoft("1.1. Вторая проверка", 1, 1)
+                                            .assertEqualsSoft("1.1. Третья проверка", 1, 1)
+                                            .groupSoft(
+                                                    "Первая группа. Второй уровень",
+                                                    nestedValidator2 -> nestedValidator2
+                                                            .assertEqualsSoft("1.2. Первая проверка", 1, 2)
+                                                            .assertEqualsSoft("1.2. Вторая проверка", 1, 1)
+                                                            .assertEqualsSoft("1.2. Третья проверка", 1, 1)
+                                            )
+                            )
+                            .groupSoft(
+                                    "Вторая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .assertEqualsSoft("2.1. Первая проверка", 1, 1)
+                                            .assertEqualsSoft("2.1. Вторая проверка", 1, 1)
+                                            .assertEqualsSoft("2.1. Третья проверка", 1, 1)
+                                            .groupSoft(
+                                                    "Вторая группа. Второй уровень",
+                                                    nestedValidator2 -> nestedValidator2
+                                                            .assertEqualsSoft("2.2. Первая проверка", 1, 1)
+                                                            .assertEqualsSoft("2.2. Вторая проверка", 1, 1)
+                                                            .assertEqualsSoft("2.2. Третья проверка", 1, 1)
+                                            )
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 12;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Два уровня вложенности. Две группы провалены.")
+            public void assertSoft6() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .groupSoft(
+                                    "Первая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .assertEqualsSoft("1.1. Первая проверка", 1, 1)
+                                            .assertEqualsSoft("1.1. Вторая проверка", 1, 1)
+                                            .assertEqualsSoft("1.1. Третья проверка", 1, 1)
+                                            .groupSoft(
+                                                    "Первая группа. Второй уровень",
+                                                    nestedValidator2 -> nestedValidator2
+                                                            .assertEqualsSoft("1.2. Первая проверка", 1, 2)
+                                                            .assertEqualsSoft("1.2. Вторая проверка", 1, 1)
+                                                            .assertEqualsSoft("1.2. Третья проверка", 1, 1)
+                                            )
+                            )
+                            .groupSoft(
+                                    "Вторая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .assertEqualsSoft("2.1. Первая проверка", 1, 1)
+                                            .assertEqualsSoft("2.1. Вторая проверка", 1, 1)
+                                            .assertEqualsSoft("2.1. Третья проверка", 1, 1)
+                                            .groupSoft(
+                                                    "Вторая группа. Второй уровень",
+                                                    nestedValidator2 -> nestedValidator2
+                                                            .assertEqualsSoft("2.2. Первая проверка", 1, 1)
+                                                            .assertEqualsSoft("2.2. Вторая проверка", 1, 1)
+                                                            .assertEqualsSoft("2.2. Третья проверка", 1, 2)
+                                            )
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 12;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Два уровня вложенности. Две группы провалены. На каждом уровне ошибки.")
+            public void assertSoft7() {
+                try {
+                    ValidatorFabric.beginAssertValidation()
+                            .groupSoft(
+                                    "Первая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .assertEqualsSoft("1.1. Первая проверка", 1, 1)
+                                            .assertEqualsSoft("1.1. Вторая проверка", 1, 2)
+                                            .assertEqualsSoft("1.1. Третья проверка", 1, 1)
+                                            .groupSoft(
+                                                    "Первая группа. Второй уровень",
+                                                    nestedValidator2 -> nestedValidator2
+                                                            .assertEqualsSoft("1.2. Первая проверка", 1, 2)
+                                                            .assertEqualsSoft("1.2. Вторая проверка", 1, 1)
+                                                            .assertEqualsSoft("1.2. Третья проверка", 1, 1)
+                                            )
+                            )
+                            .groupSoft(
+                                    "Вторая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .assertEqualsSoft("2.1. Первая проверка", 1, 2)
+                                            .assertEqualsSoft("2.1. Вторая проверка", 1, 1)
+                                            .assertEqualsSoft("2.1. Третья проверка", 1, 1)
+                                            .groupSoft(
+                                                    "Вторая группа. Второй уровень",
+                                                    nestedValidator2 -> nestedValidator2
+                                                            .assertEqualsSoft("2.2. Первая проверка", 1, 1)
+                                                            .assertEqualsSoft("2.2. Вторая проверка", 1, 1)
+                                                            .assertEqualsSoft("2.2. Третья проверка", 1, 2)
+                                            )
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 12;
+                    Integer expectedCountValidationError = 4;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
                 }
             }
         }

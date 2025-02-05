@@ -117,7 +117,7 @@ public class ErrorManager {
             collectErrorValidationsIN(chainValidationException);
             throw chainValidationException;
         } else {
-            ChainValidationError chainValidationError = new ChainValidationError(message);
+            ChainValidationError chainValidationError = new ChainValidationError(message, this.countValidation, this.errors.size());
             collectErrorValidationsIN(chainValidationError);
             throw chainValidationError;
         }
