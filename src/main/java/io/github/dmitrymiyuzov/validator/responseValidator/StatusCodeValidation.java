@@ -38,6 +38,7 @@ public class StatusCodeValidation {
             currentValidation.exitStepWithStopTime(Status.FAILED);
             addErrorToPool(e);
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         }
     }
 
@@ -53,6 +54,7 @@ public class StatusCodeValidation {
             currentValidation.exitStepWithStopTime(Status.FAILED);
             addErrorToPool(e);
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         }
     }
 
@@ -69,6 +71,7 @@ public class StatusCodeValidation {
             currentValidation.exitStepWithStopTime(Status.FAILED);
             addErrorToPool(e);
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         }
     }
 
