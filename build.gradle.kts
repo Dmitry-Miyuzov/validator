@@ -60,6 +60,11 @@ dependencies {
      */
     runtimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.3")
 
+    /*
+    Для тестировиния апи - заглушки
+     */
+    testImplementation("com.github.tomakehurst:wiremock:2.27.2")
+
 }
 
 fun Test.common() {

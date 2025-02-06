@@ -147,6 +147,7 @@ public class BodyValidation {
             currentValidation.exitStepWithStopTime(Status.FAILED);
             addErrorWhenNotAssertMatcherToPool(e.getMessage(), jsonPath);
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         } catch (IllegalArgumentException e) {
             if (matcher == null) {
                 createAllureStepMatcherNull();

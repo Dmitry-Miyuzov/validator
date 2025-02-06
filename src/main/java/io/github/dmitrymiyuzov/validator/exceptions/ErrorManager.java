@@ -113,7 +113,7 @@ public class ErrorManager {
 
     public void throwException(String message) {
         if (isHaveIllegalArgumentException()) {
-            ChainValidationException chainValidationException = new ChainValidationException(message);
+            ChainValidationException chainValidationException = new ChainValidationException(message, this.countValidation, this.errors.size());
             collectErrorValidationsIN(chainValidationException);
             throw chainValidationException;
         } else {
