@@ -3,17 +3,12 @@ package io.github.dmitrymiyuzov;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import com.github.tomakehurst.wiremock.stubbing.StubMapping;
 import io.github.dmitrymiyuzov.helper.AllureListener;
 import io.github.dmitrymiyuzov.validator._config.ThreadLocalValidatorFabricConfig;
 import io.github.dmitrymiyuzov.validator._config.impl.ValidatorFabricConfig;
-import io.github.dmitrymiyuzov.validator.base.Validator;
 import io.github.dmitrymiyuzov.validator.base.ValidatorFabric;
-import io.github.dmitrymiyuzov.validator.exceptions.ErrorManager;
 import io.github.dmitrymiyuzov.validator.exceptions.base.ChainValidationError;
 import io.github.dmitrymiyuzov.validator.exceptions.base.ChainValidationException;
-import io.github.dmitrymiyuzov.validator.exceptions.response.body.bodyFile.ExpectedFileNotFoundError;
-import io.github.dmitrymiyuzov.validator.exceptions.response.body.bodyFile.ReadFileError;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -1138,7 +1133,124 @@ public class ResponseValidatorTest {
         @Feature("Soft")
         @Story("Body Has Attribute Soft")
         class BodyHasAttributeSoft {
+            private static final String url = "/api/bodyHasAttribute";
 
+            @BeforeAll
+            public static void createStub() {
+                WireMock.stubFor(
+                        get(
+                                urlEqualTo(url)
+                        )
+                                .willReturn(
+                                        aResponse()
+                                                .withStatus(200)
+                                                .withHeader("Content-type", "application/json")
+                                                .withBody(readFileAsString("stubs/bodyHasAttribute/stub1.json"))
+                                )
+                );
+            }
+
+            @Test
+            @DisplayName("Успешный. Простой атрибут.")
+            public void assertSoft1() {
+                Response response = getBaseReqSpec().get(url);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .bodyHasAttributeSoft("$", "attrSimple")
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Успешный. Массив.")
+            public void assertSoft2() {
+                Response response = getBaseReqSpec().get(url);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .bodyHasAttributeSoft("$", "attrArray")
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Проваленный. Атрибут отсутствует.")
+            public void assertSoft3() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyHasAttributeSoft("$", "hello")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Два провалено, один успешный.")
+            public void assertSoft4() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyHasAttributeSoft("$", "hello")
+                            .bodyHasAttributeSoft("$", "attrArray")
+                            .bodyHasAttributeSoft("$", "hello2")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Parent Json Path - невалидный.")
+            public void assertSoft5() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyHasAttributeSoft("#", "hello")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationException e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Attribute - невалидный.")
+            public void assertSoft6() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyHasAttributeSoft("$", "#")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
         }
 
         @Nested
@@ -1146,7 +1258,114 @@ public class ResponseValidatorTest {
         @Feature("Soft")
         @Story("Body Not Has Attribute Soft")
         class BodyNotHasAttributeSoft {
+            private static final String url = "/api/bodyNotHasAttribute";
 
+            @BeforeAll
+            public static void createStub() {
+                WireMock.stubFor(
+                        get(
+                                urlEqualTo(url)
+                        )
+                                .willReturn(
+                                        aResponse()
+                                                .withStatus(200)
+                                                .withHeader("Content-type", "application/json")
+                                                .withBody(readFileAsString("stubs/bodyNotHasAttribute/stub1.json"))
+                                )
+                );
+            }
+
+            @Test
+            @DisplayName("Успешный. Атрибут отсутствует.")
+            public void assertSoft1() {
+                Response response = getBaseReqSpec().get(url);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .bodyNotHasAttributeSoft("$", "hello")
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Проваленный. Атрибут присутствует. Простой атрибут.")
+            public void assertSoft3() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyNotHasAttributeSoft("$", "attrSimple")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Атрибут присутствует. Массив.")
+            public void assertSoft4() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyNotHasAttributeSoft("$", "attrArray")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Два провалено, один успешный.")
+            public void assertSoft5() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyNotHasAttributeSoft("$", "attrSimple")
+                            .bodyNotHasAttributeSoft("$", "hello")
+                            .bodyNotHasAttributeSoft("$", "attrArray")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Parent Json Path - невалидный.")
+            public void assertSoft6() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyNotHasAttributeSoft("#", "hello")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationException e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
         }
     }
 
