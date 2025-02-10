@@ -953,7 +953,184 @@ public class ResponseValidatorTest {
         @Feature("Soft")
         @Story("Body Array Size Soft")
         class ArraySizeSoft {
+            private static final String url = "/api/bodyArraySize";
 
+            @BeforeAll
+            public static void createStub() {
+                WireMock.stubFor(
+                        get(
+                                urlEqualTo(url)
+                        )
+                                .willReturn(
+                                        aResponse()
+                                                .withStatus(200)
+                                                .withHeader("Content-type", "application/json")
+                                                .withBody(readFileAsString("stubs/bodyArraySize/stub1.json"))
+                                )
+                );
+            }
+
+            @Test
+            @DisplayName("Успешный. Массив не пустой.")
+            public void assertSoft1() {
+                Response response = getBaseReqSpec().get(url);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .bodyArraySizeEqualsSoft("arraySizeThree", 3)
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Успешный. Массив пустой.")
+            public void assertSoft2() {
+                Response response = getBaseReqSpec().get(url);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .bodyArraySizeEqualsSoft("arrayEmpty", 0)
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Проваленный. Массив не пустой.")
+            public void assertSoft3() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyArraySizeEqualsSoft("arraySizeThree", 2)
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Массив пустой.")
+            public void assertSoft4() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyArraySizeEqualsSoft("arrayEmpty", 2)
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Массива не существует.")
+            public void assertSoft5() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyArraySizeEqualsSoft("hello", 2)
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Некорректный jsonPath.")
+            public void assertSoft6() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyArraySizeEqualsSoft("##", 2)
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationException e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Это не массив - с значением.")
+            public void assertSoft7() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyArraySizeEqualsSoft("attributeWithValue", 1)
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Это не массив - значение пустое.")
+            public void assertSoft8() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyArraySizeEqualsSoft("attributeEmpty", 0)
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Два не прошло, один прошел.")
+            public void assertSoft9() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyArraySizeEqualsSoft("arraySizeThree", 2)
+                            .bodyArraySizeEqualsSoft("arraySizeThree", 3)
+                            .bodyArraySizeEqualsSoft("attributeEmpty", 0)
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
         }
 
         @Nested
