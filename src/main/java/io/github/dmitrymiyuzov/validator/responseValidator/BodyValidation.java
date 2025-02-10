@@ -59,7 +59,6 @@ public class BodyValidation {
                 createAllureStepInvalidJsonPath(jsonPath);
                 addErrorInvalidJsonPathToPool(jsonPath);
             }
-            createAllureStepErrorMessage(allureErrorMessage);
             currentValidation.exitStepWithStopTime(Status.FAILED);
             validator.exitMainAllureStep(Status.FAILED);
             errorManager.throwExceptionBroken();
@@ -156,7 +155,6 @@ public class BodyValidation {
                 createAllureStepInvalidJsonPath(jsonPath);
                 addErrorInvalidJsonPathToPool(jsonPath);
             }
-            createAllureStepErrorMessage(allureErrorMessage);
             currentValidation.exitStepWithStopTime(Status.FAILED);
             errorManager.setSoftAssert(true);
             validator.setMainAllureStepStatusWhenSoft(Status.FAILED);

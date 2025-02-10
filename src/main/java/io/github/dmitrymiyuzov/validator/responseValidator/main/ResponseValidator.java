@@ -424,7 +424,7 @@ public class ResponseValidator implements
                 .formatted(jsonPath);
     }
     private String getAllureErrorMessageValidateArrayEmpty(String jsonPath) {
-        return "Массив по пути \"%s\" не пустой."
+        return "Массив по пути \"%s\" не пустой или отсутствует, или это не массив."
                 .formatted(jsonPath);
     }
     private String getStepNameValidateHasAttribute(String parentJsonPath, String attribute) {

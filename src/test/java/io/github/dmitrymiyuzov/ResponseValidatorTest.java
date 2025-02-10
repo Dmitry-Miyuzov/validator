@@ -792,6 +792,185 @@ public class ResponseValidatorTest {
                 }
             }
         }
+
+        @Nested
+        @Epic("Response")
+        @Feature("Soft")
+        @Story("Body Array Empty Soft")
+        class ArrayEmptySoft {
+            private static final String url = "/api/bodyArrayEmpty";
+
+            @BeforeAll
+            public static void createStub() {
+                WireMock.stubFor(
+                        get(
+                                urlEqualTo(url)
+                        )
+                                .willReturn(
+                                        aResponse()
+                                                .withStatus(200)
+                                                .withHeader("Content-type", "application/json")
+                                                .withBody(readFileAsString("stubs/bodyArrayEmpty/stub1.json"))
+                                )
+                );
+            }
+
+            @Test
+            @DisplayName("Успешный.")
+            public void assertSoft1() {
+                Response response = getBaseReqSpec().get(url);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .bodyArrayEmptySoft("arrayEmpty")
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Проваленный. Массив не пустой.")
+            public void assertSoft2() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyArrayEmptySoft("arraySizeThree")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Массива не существует.")
+            public void assertSoft3() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyArrayEmptySoft("hello")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Некорректный jsonPath.")
+            public void assertSoft4() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyArrayEmptySoft("##")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationException e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Это не массив - значение заполнено.")
+            public void assertSoft5() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyArrayEmptySoft("attributeWithValue")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Это не массив - значение пустое.")
+            public void assertSoft6() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyArrayEmptySoft("attributeEmpty")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Два не прошло, один прошел.")
+            public void assertSoft7() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyArrayEmptySoft("arraySizeThree")
+                            .bodyArrayEmptySoft("arrayEmpty")
+                            .bodyArrayEmptySoft("hello")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+        }
+
+        @Nested
+        @Epic("Response")
+        @Feature("Soft")
+        @Story("Body Array Size Soft")
+        class ArraySizeSoft {
+
+        }
+
+        @Nested
+        @Epic("Response")
+        @Feature("Soft")
+        @Story("Body Has Attribute Soft")
+        class BodyHasAttributeSoft {
+
+        }
+
+        @Nested
+        @Epic("Response")
+        @Feature("Soft")
+        @Story("Body Not Has Attribute Soft")
+        class BodyNotHasAttributeSoft {
+
+        }
     }
 
     private static String readFileAsString(String pathFile) {

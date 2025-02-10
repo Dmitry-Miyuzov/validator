@@ -1,0 +1,19 @@
+{
+  "arrayEmpty": [
+
+
+  ],
+  "arraySizeThree": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    }
+  ],
+  "attributeWithValue": "123",
+  "attributeEmpty": ""
+}
