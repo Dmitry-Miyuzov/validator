@@ -1,0 +1,18 @@
+{
+  "address": {
+    "street": "Иванушкино"
+  },
+  "name": "hello",
+  "isActive": true,
+  "id": 1,
+  "cars": [
+    {
+      "age": 5,
+      "name": "Ауди"
+    },
+    {
+      "age": 2,
+      "name": "Бмв"
+    }
+  ]
+}

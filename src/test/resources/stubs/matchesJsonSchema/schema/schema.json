@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "cars": {
+      "type": "array",
+      "description": "Массив машин",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "age",
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "street"
+      ],
+      "additionalProperties": false
+    },
+    "isActive": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "name",
+    "id",
+    "address",
+    "cars",
+    "isActive"
+  ],
+  "additionalProperties": false
+}

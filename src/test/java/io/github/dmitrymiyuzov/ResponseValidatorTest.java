@@ -1367,6 +1367,410 @@ public class ResponseValidatorTest {
                 }
             }
         }
+
+        @Nested
+        @Epic("Response")
+        @Feature("Soft")
+        @Story("Header Contains Soft")
+        class HeaderContainsSoft {
+            private static final String url = "/api/headerContains";
+
+            @BeforeAll
+            public static void createStub() {
+                WireMock.stubFor(
+                        get(
+                                urlEqualTo(url)
+                        )
+                                .willReturn(
+                                        aResponse()
+                                                .withStatus(200)
+                                                .withHeader("Content-type", "application/json")
+                                )
+                );
+            }
+
+            @Test
+            @DisplayName("Успешный.")
+            public void assertSoft1() {
+                Response response = getBaseReqSpec().get(url);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .headerContainsSoft("Content-type", "application")
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Проваленный. Заголовок присутствует.")
+            public void assertSoft2() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .headerContainsSoft("Content-type", "Application")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Заголовок отсутствует.")
+            public void assertSoft3() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .headerContainsSoft("Conten", "application")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Два проваленных, один успешный.")
+            public void assertSoft4() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .headerContainsSoft("Conten", "application")
+                            .headerContainsSoft("Content-type", "application")
+                            .headerContainsSoft("Content-type", "Application")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+        }
+
+        @Nested
+        @Epic("Response")
+        @Feature("Soft")
+        @Story("Header Equals Soft")
+        class HeaderEqualsSoft {
+            private static final String url = "/api/headerEquals";
+
+            @BeforeAll
+            public static void createStub() {
+                WireMock.stubFor(
+                        get(
+                                urlEqualTo(url)
+                        )
+                                .willReturn(
+                                        aResponse()
+                                                .withStatus(200)
+                                                .withHeader("Content-type", "application/json")
+                                )
+                );
+            }
+
+            @Test
+            @DisplayName("Успешный.")
+            public void assertSoft1() {
+                Response response = getBaseReqSpec().get(url);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .headerEqualsSoft("Content-type", "application/json")
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Проваленный. Заголовок присутствует.")
+            public void assertSoft2() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .headerEqualsSoft("Content-type", "Application/json")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Заголовок отсутствует.")
+            public void assertSoft3() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .headerEqualsSoft("Conten", "application/json")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Два проваленных, один успешный.")
+            public void assertSoft4() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .headerEqualsSoft("Conten", "application")
+                            .headerEqualsSoft("Content-type", "application/json")
+                            .headerEqualsSoft("Content-type", "Application/json")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+        }
+
+        @Nested
+        @Epic("Response")
+        @Feature("Soft")
+        @Story("Matches Json Schema Soft")
+        class MatchesJsonSchemaSoft {
+            private static final String urlSuccess = "/api/matchesJsonSchemaSuccess";
+            private static final String urlFailed = "/api/matchesJsonSchemaFailed";
+
+            @BeforeAll
+            public static void createStub() {
+                WireMock.stubFor(
+                        get(
+                                urlEqualTo(urlSuccess)
+                        )
+                                .willReturn(
+                                        aResponse()
+                                                .withStatus(200)
+                                                .withHeader("Content-type", "application/json")
+                                                .withBody(readFileAsString("stubs/matchesJsonSchema/stub1.json"))
+                                )
+                );
+                WireMock.stubFor(
+                        get(
+                                urlEqualTo(urlFailed)
+                        )
+                                .willReturn(
+                                        aResponse()
+                                                .withStatus(200)
+                                                .withHeader("Content-type", "application/json")
+                                                .withBody(readFileAsString("stubs/matchesJsonSchema/stub2.json"))
+                                )
+                );
+            }
+
+            @Test
+            @DisplayName("Успешный.")
+            public void assertSoft1() {
+                Response response = getBaseReqSpec().get(urlSuccess);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .matchesJsonSchemaSoft(readFileAsString("stubs/matchesJsonSchema/schema/schema.json"))
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Проваленный.")
+            public void assertSoft2() {
+                Response response = getBaseReqSpec().get(urlFailed);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .matchesJsonSchemaSoft(readFileAsString("stubs/matchesJsonSchema/schema/schema.json"))
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+        }
+
+        @Nested
+        @Epic("Response")
+        @Feature("Soft")
+        @Story("Body Equals File Soft")
+        class BodyEqualsFile {
+            private static final String url = "/api/bodyEqualsFile";
+
+            @BeforeAll
+            public static void createStub() {
+                WireMock.stubFor(
+                        get(
+                                urlEqualTo(url)
+                        )
+                                .willReturn(
+                                        aResponse()
+                                                .withStatus(200)
+                                                .withHeader("Content-type", "application/json")
+                                                .withBody(readFileAsString("stubs/bodyEqualsFile/stub1.json"))
+                                )
+                );
+            }
+
+            @Test
+            @DisplayName("Успешный. Файл полностью соответствует ответу.")
+            public void assertSoft1() {
+                Response response = getBaseReqSpec().get(url);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .bodyEqualsFile("stubs/bodyEqualsFile/files/file1.json")
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Успешный. В файле другой порядок атрибутов простых атрибутов (но уровни не нарушены).")
+            public void assertSoft2() {
+                Response response = getBaseReqSpec().get(url);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .bodyEqualsFile("stubs/bodyEqualsFile/files/file2.json")
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Успешный. В файле другой порядок простых атрибутов, другой порядок в объектах, но массив в том же порядке.")
+            public void assertSoft3() {
+                Response response = getBaseReqSpec().get(url);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .bodyEqualsFileSoft("stubs/bodyEqualsFile/files/file3.json")
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Проваленный, в файле другой порядок объектов массивов.")
+            public void assertSoft4() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyEqualsFileSoft("stubs/bodyEqualsFile/files/file4.json")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный, файл не найден.")
+            public void assertSoft5() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyEqualsFileSoft("stubs/bodyEqualsFile/files/ahaha.json")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный, файл не может спарсится.")
+            public void assertSoft6() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyEqualsFileSoft("stubs/bodyEqualsFile/files/file5.json")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный, два проваленных, один успешный.")
+            public void assertSoft7() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodyEqualsFileSoft("stubs/bodyEqualsFile/files/file5.json")
+                            .bodyEqualsFileSoft("stubs/bodyEqualsFile/files/file1.json")
+                            .bodyEqualsFileSoft("stubs/bodyEqualsFile/files/file5.json")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+        }
+//
+//        @Nested
+//        @Epic("Response")
+//        @Feature("Soft")
+//        @Story("Body Soft")
+//        class BodySoft {
+//
+//        }
+//
+//        @Nested
+//        @Epic("Response")
+//        @Feature("Soft")
+//        @Story("Group Soft")
+//        class GroupSoft {
+//
+//        }
     }
 
     private static String readFileAsString(String pathFile) {

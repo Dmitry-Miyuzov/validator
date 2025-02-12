@@ -67,11 +67,13 @@ public class HeaderValidation {
             currentValidation.exitStepWithStopTime(Status.FAILED);
             errors.add(e);
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         } catch (HeaderEqualsError e) {
             createAllureStepWhenHeaderNotEquals(getValueHeaderOrElseThrowHeaderEquals(header), expectedValue);
             currentValidation.exitStepWithStopTime(Status.FAILED);
             errors.add(e);
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         }
     }
 
@@ -113,11 +115,13 @@ public class HeaderValidation {
             currentValidation.exitStepWithStopTime(Status.FAILED);
             errors.add(e);
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         } catch (HeaderContainsError e) {
             createAllureStepWhenHeaderNotContains(getValueHeaderOrElseThrowHeaderEquals(header), containsValue);
             currentValidation.exitStepWithStopTime(Status.FAILED);
             errors.add(e);
             errorManager.setSoftAssert(true);
+            validator.setMainAllureStepStatusWhenSoft(Status.FAILED);
         }
     }
 
