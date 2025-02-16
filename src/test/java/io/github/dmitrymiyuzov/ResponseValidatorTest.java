@@ -15,6 +15,7 @@ import io.qameta.allure.Story;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.*;
 
 import java.io.BufferedReader;
@@ -1755,22 +1756,416 @@ public class ResponseValidatorTest {
                 }
             }
         }
-//
-//        @Nested
-//        @Epic("Response")
-//        @Feature("Soft")
-//        @Story("Body Soft")
-//        class BodySoft {
-//
-//        }
-//
-//        @Nested
-//        @Epic("Response")
-//        @Feature("Soft")
-//        @Story("Group Soft")
-//        class GroupSoft {
-//
-//        }
+
+        @Nested
+        @Epic("Response")
+        @Feature("Soft")
+        @Story("Body Soft")
+        class BodySoft {
+            private static final String url = "/api/body";
+
+            @BeforeAll
+            public static void createStub() {
+                WireMock.stubFor(
+                        get(
+                                urlEqualTo(url)
+                        )
+                                .willReturn(
+                                        aResponse()
+                                                .withStatus(200)
+                                                .withHeader("Content-type", "application/json")
+                                                .withBody(readFileAsString("stubs/body/stub1.json"))
+                                )
+                );
+            }
+
+            @Test
+            @DisplayName("Успешный. С дефолтным аллюром.")
+            public void assertSoft1() {
+                Response response = getBaseReqSpec().get(url);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .bodySoft( "name", Matchers.equalTo("hello"))
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Успешный. С своим аллюром.")
+            public void assertSoft2() {
+                Response response = getBaseReqSpec().get(url);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .bodySoft( "Название шага", "name", Matchers.equalTo("hello"))
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Проваленный. Дефолтное описание ошибки.")
+            public void assertSoft3() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodySoft(  "name", Matchers.equalTo("hell"))
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Свое описание ошибки.")
+            public void assertSoft4() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodySoft(  "name", Matchers.equalTo("hell"), "Свое описание")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Пустой матчер.")
+            public void assertSoft5() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodySoft(  "name", null)
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationException e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 1;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Два упало, один прошел.")
+            public void assertSoft6() {
+                Response response = getBaseReqSpec().get(url);
+
+                try {
+                    ValidatorFabric.beginResponseValidation(response)
+                            .bodySoft(  "name", Matchers.equalTo("hell"), "Свое описание")
+                            .bodySoft(  "name", Matchers.equalTo("hello"), "Свое описание")
+                            .bodySoft(  "name", Matchers.equalTo("hell"), "Свое описание")
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 3;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+        }
+
+        @Nested
+        @Epic("Response")
+        @Feature("Soft")
+        @Story("Group Soft")
+        class GroupSoft {
+            private static final String url = "/api/soft";
+
+            @BeforeAll
+            public static void createStub() {
+                WireMock.stubFor(
+                        get(
+                                urlEqualTo(url)
+                        )
+                                .willReturn(
+                                        aResponse()
+                                                .withStatus(200)
+                                                .withHeader("Content-type", "application/json")
+                                                .withBody(readFileAsString("stubs/soft/stub1.json"))
+                                )
+                );
+            }
+
+            @Test
+            @DisplayName("Успешный. Один уровень вложенности.")
+            public void assertSoft1() {
+                Response response = getBaseReqSpec().get(url);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .groupSoft(
+                                "Первая группа. Первый уровень",
+                                nestedValidator -> nestedValidator
+                                        .bodyEqualsSoft("name", "hello")
+                                        .bodyEqualsSoft("name", "hello")
+                                        .bodyEqualsSoft("name", "hello")
+                        )
+                        .groupSoft(
+                                "Вторая группа. Первый уровень",
+                                nestedValidator -> nestedValidator
+                                        .bodyEqualsSoft("name", "hello")
+                                        .bodyEqualsSoft("name", "hello")
+                                        .bodyEqualsSoft("name", "hello")
+                        )
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Успешный. Два уровня вложенности.")
+            public void assertSoft2() {
+                Response response = getBaseReqSpec().get(url);
+
+                ValidatorFabric.beginResponseValidation(response)
+                        .groupSoft(
+                                "Первая группа. Первый уровень",
+                                nestedValidator -> nestedValidator
+                                        .bodyEqualsSoft("name", "hello")
+                                        .bodyEqualsSoft("name", "hello")
+                                        .bodyEqualsSoft("name", "hello")
+                                        .groupSoft(
+                                                "Первая группа. Второй уровень",
+                                                nestedValidator2 -> nestedValidator2
+                                                        .bodyEqualsSoft("name", "hello")
+                                                        .bodyEqualsSoft("name", "hello")
+                                                        .bodyEqualsSoft("name", "hello")
+                                        )
+                        )
+                        .groupSoft(
+                                "Вторая группа. Первый уровень",
+                                nestedValidator -> nestedValidator
+                                        .bodyEqualsSoft("name", "hello")
+                                        .bodyEqualsSoft("name", "hello")
+                                        .bodyEqualsSoft("name", "hello")
+                                        .groupSoft(
+                                                "Вторая группа. Второй уровень",
+                                                nestedValidator2 -> nestedValidator2
+                                                        .bodyEqualsSoft("name", "hello")
+                                                        .bodyEqualsSoft("name", "hello")
+                                                        .bodyEqualsSoft("name", "hello")
+                                        )
+                        )
+                        .validate();
+            }
+
+            @Test
+            @DisplayName("Проваленный. Один уровень вложенности. Одна из групп провалена.")
+            public void assertSoft3() {
+                try {
+                    Response response = getBaseReqSpec().get(url);
+                    ValidatorFabric.beginResponseValidation(response)
+                            .groupSoft(
+                                    "Первая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hell")
+                            )
+                            .groupSoft(
+                                    "Вторая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hello")
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 6;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Один уровень вложенности. Две группы провалены.")
+            public void assertSoft4() {
+                try {
+                    Response response = getBaseReqSpec().get(url);
+                    ValidatorFabric.beginResponseValidation(response)
+                            .groupSoft(
+                                    "Первая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hell")
+                            )
+                            .groupSoft(
+                                    "Вторая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hell")
+                                            .bodyEqualsSoft("name", "hello")
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 6;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Два уровня вложенности. Одна из групп провалена.")
+            public void assertSoft5() {
+                try {
+                    Response response = getBaseReqSpec().get(url);
+                    ValidatorFabric.beginResponseValidation(response)
+                            .groupSoft(
+                                    "Первая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hello")
+                                            .groupSoft(
+                                                    "Первая группа. Второй уровень",
+                                                    nestedValidator2 -> nestedValidator2
+                                                            .bodyEqualsSoft("name", "hell")
+                                                            .bodyEqualsSoft("name", "hello")
+                                                            .bodyEqualsSoft("name", "hello")
+                                            )
+                            )
+                            .groupSoft(
+                                    "Вторая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hello")
+                                            .groupSoft(
+                                                    "Вторая группа. Второй уровень",
+                                                    nestedValidator2 -> nestedValidator2
+                                                            .bodyEqualsSoft("name", "hello")
+                                                            .bodyEqualsSoft("name", "hello")
+                                                            .bodyEqualsSoft("name", "hello")
+                                            )
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 12;
+                    Integer expectedCountValidationError = 1;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Два уровня вложенности. Две группы провалены.")
+            public void assertSoft6() {
+                try {
+                    Response response = getBaseReqSpec().get(url);
+                    ValidatorFabric.beginResponseValidation(response)
+                            .groupSoft(
+                                    "Первая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hello")
+                                            .groupSoft(
+                                                    "Первая группа. Второй уровень",
+                                                    nestedValidator2 -> nestedValidator2
+                                                            .bodyEqualsSoft("name", "hell")
+                                                            .bodyEqualsSoft("name", "hello")
+                                                            .bodyEqualsSoft("name", "hello")
+                                            )
+                            )
+                            .groupSoft(
+                                    "Вторая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hello")
+                                            .groupSoft(
+                                                    "Вторая группа. Второй уровень",
+                                                    nestedValidator2 -> nestedValidator2
+                                                            .bodyEqualsSoft("name", "hello")
+                                                            .bodyEqualsSoft("name", "hello")
+                                                            .bodyEqualsSoft("name", "hell")
+                                            )
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 12;
+                    Integer expectedCountValidationError = 2;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+
+            @Test
+            @DisplayName("Проваленный. Два уровня вложенности. Две группы провалены. На каждом уровне ошибки.")
+            public void assertSoft7() {
+                try {
+                    Response response = getBaseReqSpec().get(url);
+                    ValidatorFabric.beginResponseValidation(response)
+                            .groupSoft(
+                                    "Первая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hell2o")
+                                            .bodyEqualsSoft("name", "hello")
+                                            .groupSoft(
+                                                    "Первая группа. Второй уровень",
+                                                    nestedValidator2 -> nestedValidator2
+                                                            .bodyEqualsSoft("name", "h2ello")
+                                                            .bodyEqualsSoft("name", "hello")
+                                                            .bodyEqualsSoft("name", "hello")
+                                            )
+                            )
+                            .groupSoft(
+                                    "Вторая группа. Первый уровень",
+                                    nestedValidator -> nestedValidator
+                                            .bodyEqualsSoft("name", "hel2lo")
+                                            .bodyEqualsSoft("name", "hello")
+                                            .bodyEqualsSoft("name", "hello")
+                                            .groupSoft(
+                                                    "Вторая группа. Второй уровень",
+                                                    nestedValidator2 -> nestedValidator2
+                                                            .bodyEqualsSoft("name", "hello")
+                                                            .bodyEqualsSoft("name", "hello")
+                                                            .bodyEqualsSoft("name", "hello2")
+                                            )
+                            )
+                            .validate();
+                    Assertions.fail();
+                } catch (ChainValidationError e) {
+                    e.printStackTrace();
+
+                    Integer expectedCountValidation = 12;
+                    Integer expectedCountValidationError = 4;
+                    Assertions.assertEquals(expectedCountValidation, e.getCountValidation(), "Ожидаемое количество проверок - %d".formatted(expectedCountValidation));
+                    Assertions.assertEquals(expectedCountValidationError, e.getCountErrorValidation(), "Ожидаемое количество ошибок - %d".formatted(expectedCountValidationError));
+                }
+            }
+        }
     }
 
     private static String readFileAsString(String pathFile) {
